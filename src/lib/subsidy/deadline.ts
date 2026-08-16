@@ -110,7 +110,8 @@ function calcJigyoukaDeadlines(
   }
 
   // fixedWindow: 補助事業終了(予定)日以後に最初に到来する期限日(例: 5/31)を初回とし、以降毎年。
-  // 正式には初回は「補助金受領後」の最初の報告期間のため、受領が遅い場合は1年後ろにずれうる。
+  // 正式ルール(19次手引き)は「補助金受領後、最初に迎える4/1から60日以内」が初回。受領日は
+  // 入力にないため終了予定日で近似しており、額確定が3/1以降にずれると実際は1年繰り下がる。
   const firstYear =
     compare({ y: yotei.y, m: rule.month, d: rule.day }, yotei) >= 0 ? yotei.y : yotei.y + 1;
   for (let i = 0; i < rule.count; i++) {
@@ -122,7 +123,7 @@ function calcJigyoukaDeadlines(
       dueDate: toISO(due),
       dueDateJa: formatJa(due),
       source: program.jigyouka.source,
-      note: `報告期間 ${rule.windowLabel}(初回は補助金受領月により前後)`,
+      note: `報告期間 ${rule.windowLabel}(初回は補助金受領後最初の4/1から。額確定が3月以降の場合は1年繰り下げ)`,
     });
   }
   return items;
