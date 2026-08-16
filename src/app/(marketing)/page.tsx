@@ -159,7 +159,6 @@ export default function LandingPage() {
               <select
                 id="lp-program"
                 name="program"
-                defaultValue="saikouchiku-11"
                 className="mb-[18px] h-[42px] w-full rounded border border-border-input bg-white px-3 text-sm"
               >
                 {groups.map((g) => (

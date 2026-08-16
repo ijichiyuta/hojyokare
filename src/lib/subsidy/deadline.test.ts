@@ -154,6 +154,34 @@ describe("calcDeadlines: ものづくり(固定報告期間)", () => {
   });
 });
 
+describe("制度マスタの整合性", () => {
+  it("IDは一意で、全公募回で期限計算が成立する", async () => {
+    const { PROGRAM_MASTERS } = await import("./master");
+    const ids = PROGRAM_MASTERS.map((p) => p.id);
+    expect(new Set(ids).size).toBe(ids.length);
+    for (const p of PROGRAM_MASTERS) {
+      const r = calcDeadlines({
+        programId: p.id,
+        koufuKetteiDate: "2025-06-20",
+        shuuryouYoteiDate: "2026-03-31",
+        kessanMonth: 3,
+      });
+      expect(r.jigyouka).toHaveLength(6);
+      expect(r.jisseki.dueDate <= r.completionDeadline.dueDate).toBe(true);
+      expect(r.zaisanShobun.endDate > r.zaisanShobun.startDate).toBe(true);
+    }
+  });
+
+  it("枠・類型で完了期限の月数が変わる(グリーン成長枠/GX進出類型=14ヶ月、グローバル枠=12ヶ月)", async () => {
+    const { getProgram } = await import("./master");
+    expect(getProgram("saikouchiku-12").jisseki.completionLimitMonths).toBe(12);
+    expect(getProgram("saikouchiku-12-gx").jisseki.completionLimitMonths).toBe(14);
+    expect(getProgram("saikouchiku-6-green").jisseki.completionLimitMonths).toBe(14);
+    expect(getProgram("monozukuri-19").jisseki.completionLimitMonths).toBe(10);
+    expect(getProgram("monozukuri-19-global").jisseki.completionLimitMonths).toBe(12);
+  });
+});
+
 describe("calcDeadlines: 入力バリデーション", () => {
   const input = {
     programId: "saikouchiku-11",

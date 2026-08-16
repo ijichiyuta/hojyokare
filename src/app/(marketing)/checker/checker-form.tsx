@@ -87,7 +87,7 @@ export function CheckerForm({ groups, defaults }: Props) {
       <FieldRow
         label="公募回"
         htmlFor="program"
-        hint="交付決定通知書に記載の公募回を選択してください"
+        hint="交付決定通知書に記載の公募回を選択してください。グリーン成長枠・GX進出類型・グローバル枠で採択された方は専用の選択肢をお選びください"
       >
         <select
           id="program"
