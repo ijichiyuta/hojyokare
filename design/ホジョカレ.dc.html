@@ -1,0 +1,1311 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="" />
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;500;700&display=swap" rel="stylesheet" />
+<style>
+  * { box-sizing: border-box; }
+  html, body { margin: 0; padding: 0; }
+  body { font-family: "Noto Sans JP", "Hiragino Kaku Gothic ProN", "Yu Gothic", sans-serif; color: #14181D; background: #F4F5F7; -webkit-font-smoothing: antialiased; }
+  a { color: #1F5FBF; text-decoration: none; }
+  a:hover { color: #14345C; text-decoration: underline; }
+  table { border-collapse: collapse; }
+  input, select, button { font-family: inherit; font-size: inherit; color: inherit; }
+  ::placeholder { color: #A6AEB8; }
+</style>
+</helmet>
+
+<div style="min-width: 1280px; background: #F4F5F7;">
+
+<sc-if value="{{ isMarketing }}" hint-placeholder-val="{{ true }}">
+<div style="background: #FFFFFF;">
+  <header style="display: flex; align-items: center; justify-content: space-between; padding: 0 40px; height: 68px; border-bottom: 1px solid #E2E5E9; background: #FFFFFF; position: sticky; top: 0; z-index: 20;">
+    <div onClick="{{ goLp }}" style="display: flex; align-items: baseline; gap: 12px; cursor: pointer;">
+      <span style="font-size: 21px; font-weight: 700; letter-spacing: 0.04em; color: #14345C;">ホジョカレ</span>
+      <span style="font-size: 12px; color: #78828E; letter-spacing: 0.02em;">補助金採択後の期限・報告管理</span>
+    </div>
+    <nav style="display: flex; align-items: center; gap: 28px;">
+      <span style="font-size: 14px; color: #4A535E; cursor: pointer;" style-hover="color: #14345C;">機能</span>
+      <span style="font-size: 14px; color: #4A535E; cursor: pointer;" style-hover="color: #14345C;">料金</span>
+      <span style="font-size: 14px; color: #4A535E; cursor: pointer;" style-hover="color: #14345C;">士業パートナー</span>
+      <span style="font-size: 14px; color: #4A535E; cursor: pointer;" style-hover="color: #14345C;">よくある質問</span>
+      <span onClick="{{ goDash }}" style="font-size: 14px; color: #14345C; font-weight: 500; cursor: pointer; padding-left: 8px;">ログイン</span>
+      <span onClick="{{ goChecker }}" style="font-size: 14px; font-weight: 500; color: #FFFFFF; background: #14345C; padding: 10px 18px; border-radius: 4px; cursor: pointer;" style-hover="background: #1F5FBF;">無料で期限を確認</span>
+    </nav>
+  </header>
+</div>
+</sc-if>
+
+<!-- ============ LP ============ -->
+<sc-if value="{{ isLp }}" hint-placeholder-val="{{ true }}">
+<div>
+  <section style="background: #FFFFFF; border-bottom: 1px solid #E2E5E9;">
+    <div style="max-width: 1200px; margin: 0 auto; padding: 72px 40px 80px; display: grid; grid-template-columns: 1fr 440px; gap: 72px; align-items: start;">
+      <div>
+        <div style="display: inline-block; font-size: 12px; letter-spacing: 0.08em; color: #8A5A00; border: 1px solid #E8D9B4; background: #FCF8EE; padding: 5px 10px; border-radius: 3px; margin-bottom: 24px;">事業再構築補助金／ものづくり補助金 対応</div>
+        <h1 style="font-size: 46px; line-height: 1.4; font-weight: 700; margin: 0 0 24px; letter-spacing: 0.01em; text-wrap: pretty;">採択の5年後まで、<br />報告期限を落とさない。</h1>
+        <p style="font-size: 16px; line-height: 2; color: #4A535E; margin: 0 0 32px; max-width: 30em; text-wrap: pretty;">実績報告は交付決定から12ヶ月以内。そのあと事業化状況報告が5年間、毎年。<br />交付決定日を入れるだけで、5年分の期限がカレンダーになります。</p>
+        <div style="display: flex; gap: 12px; margin-bottom: 20px;">
+          <span onClick="{{ goChecker }}" style="display: inline-flex; align-items: center; gap: 10px; background: #14345C; color: #FFFFFF; font-size: 15px; font-weight: 500; padding: 15px 28px; border-radius: 4px; cursor: pointer;" style-hover="background: #1F5FBF;">無料で期限を確認する</span>
+          <span onClick="{{ goResult }}" style="display: inline-flex; align-items: center; gap: 10px; border: 1px solid #C9CFD6; color: #14181D; font-size: 15px; font-weight: 500; padding: 15px 24px; border-radius: 4px; cursor: pointer; background: #FFFFFF;" style-hover="border-color: #14345C;">計算結果の例を見る</span>
+        </div>
+        <p style="font-size: 12px; color: #78828E; margin: 0;">登録不要・3分で完了。結果はPDFとメールでお渡しします。</p>
+
+        <div style="margin-top: 48px; border-top: 1px solid #E2E5E9; padding-top: 28px; display: grid; grid-template-columns: repeat(3, 1fr); gap: 32px;">
+          <div>
+            <div style="font-size: 26px; font-weight: 700; letter-spacing: 0.02em;">5年 × 6回</div>
+            <div style="font-size: 13px; color: #4A535E; line-height: 1.8; margin-top: 6px;">実績報告＋事業化状況報告の提出回数</div>
+          </div>
+          <div>
+            <div style="font-size: 26px; font-weight: 700; letter-spacing: 0.02em;">返還</div>
+            <div style="font-size: 13px; color: #4A535E; line-height: 1.8; margin-top: 6px;">報告を怠った場合に生じうる措置</div>
+          </div>
+          <div>
+            <div style="font-size: 26px; font-weight: 700; letter-spacing: 0.02em;">Excel と記憶</div>
+            <div style="font-size: 13px; color: #4A535E; line-height: 1.8; margin-top: 6px;">多くの採択企業の現在の管理方法</div>
+          </div>
+        </div>
+      </div>
+
+      <div style="border: 1px solid #D7DCE2; border-radius: 6px; background: #FFFFFF; overflow: hidden;">
+        <div style="padding: 18px 24px; border-bottom: 1px solid #E2E5E9; display: flex; align-items: center; justify-content: space-between; background: #FAFBFC;">
+          <span style="font-size: 15px; font-weight: 700;">報告期限チェッカー</span>
+          <span style="font-size: 11px; color: #1B6B48; border: 1px solid #BFDDCC; background: #F1F8F4; padding: 3px 8px; border-radius: 3px;">無料・登録不要</span>
+        </div>
+        <div style="padding: 24px;">
+          <label style="display: block; font-size: 13px; color: #4A535E; margin-bottom: 7px;">補助金種別</label>
+          <select style="width: 100%; height: 42px; border: 1px solid #C9CFD6; border-radius: 4px; padding: 0 12px; margin-bottom: 18px; background: #FFFFFF; font-size: 14px;">
+            <option>事業再構築補助金</option>
+            <option>ものづくり補助金</option>
+          </select>
+          <label style="display: block; font-size: 13px; color: #4A535E; margin-bottom: 7px;">公募回</label>
+          <select style="width: 100%; height: 42px; border: 1px solid #C9CFD6; border-radius: 4px; padding: 0 12px; margin-bottom: 18px; background: #FFFFFF; font-size: 14px;">
+            <option>第11回</option>
+            <option>第12回</option>
+          </select>
+          <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 14px; margin-bottom: 18px;">
+            <div>
+              <label style="display: block; font-size: 13px; color: #4A535E; margin-bottom: 7px;">交付決定日</label>
+              <input type="text" value="2024/06/20" style="width: 100%; height: 42px; border: 1px solid #C9CFD6; border-radius: 4px; padding: 0 12px; font-size: 14px; font-variant-numeric: tabular-nums;" />
+            </div>
+            <div>
+              <label style="display: block; font-size: 13px; color: #4A535E; margin-bottom: 7px;">決算月</label>
+              <select style="width: 100%; height: 42px; border: 1px solid #C9CFD6; border-radius: 4px; padding: 0 12px; background: #FFFFFF; font-size: 14px;">
+                <option>3月</option>
+                <option>12月</option>
+              </select>
+            </div>
+          </div>
+          <div onClick="{{ goResult }}" style="height: 46px; display: flex; align-items: center; justify-content: center; background: #14345C; color: #FFFFFF; font-size: 15px; font-weight: 500; border-radius: 4px; cursor: pointer;" style-hover="background: #1F5FBF;">期限を計算する</div>
+          <p style="font-size: 11px; color: #78828E; line-height: 1.8; margin: 14px 0 0;">公表されている公募要領・事務処理マニュアルに基づく目安です。事務局からの個別通知が優先されます。</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section style="background: #FFFFFF; border-bottom: 1px solid #E2E5E9;">
+    <div style="max-width: 1200px; margin: 0 auto; padding: 64px 40px;">
+      <h2 style="font-size: 13px; letter-spacing: 0.14em; color: #78828E; font-weight: 500; margin: 0 0 32px;">使い方</h2>
+      <div style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 1px; background: #E2E5E9; border: 1px solid #E2E5E9;">
+        <sc-for list="{{ steps }}" as="s" hint-placeholder-count="3">
+          <div style="background: #FFFFFF; padding: 32px 28px;">
+            <div style="font-size: 12px; color: #1F5FBF; font-weight: 700; letter-spacing: 0.1em; margin-bottom: 14px;">{{ s.no }}</div>
+            <div style="font-size: 18px; font-weight: 700; margin-bottom: 12px;">{{ s.title }}</div>
+            <p style="font-size: 14px; line-height: 1.9; color: #4A535E; margin: 0;">{{ s.body }}</p>
+          </div>
+        </sc-for>
+      </div>
+    </div>
+  </section>
+
+  <section style="background: #FAFBFC; border-bottom: 1px solid #E2E5E9;">
+    <div style="max-width: 1200px; margin: 0 auto; padding: 64px 40px;">
+      <h2 style="font-size: 13px; letter-spacing: 0.14em; color: #78828E; font-weight: 500; margin: 0 0 8px;">機能</h2>
+      <p style="font-size: 24px; font-weight: 700; margin: 0 0 36px;">採択後にやることを、ひとつの画面に。</p>
+      <div style="display: grid; grid-template-columns: repeat(2, 1fr); gap: 1px; background: #E2E5E9; border: 1px solid #E2E5E9;">
+        <sc-for list="{{ features }}" as="f" hint-placeholder-count="4">
+          <div style="background: #FFFFFF; padding: 30px 28px; display: grid; grid-template-columns: 96px 1fr; gap: 20px;">
+            <div style="font-size: 11px; letter-spacing: 0.1em; color: #78828E; padding-top: 4px;">{{ f.tag }}</div>
+            <div>
+              <div style="font-size: 16px; font-weight: 700; margin-bottom: 10px;">{{ f.title }}</div>
+              <p style="font-size: 14px; line-height: 1.9; color: #4A535E; margin: 0;">{{ f.body }}</p>
+            </div>
+          </div>
+        </sc-for>
+      </div>
+    </div>
+  </section>
+
+  <section style="background: #FFFFFF; border-bottom: 1px solid #E2E5E9;">
+    <div style="max-width: 1200px; margin: 0 auto; padding: 64px 40px;">
+      <h2 style="font-size: 13px; letter-spacing: 0.14em; color: #78828E; font-weight: 500; margin: 0 0 8px;">料金</h2>
+      <p style="font-size: 24px; font-weight: 700; margin: 0 0 8px;">案件ごとの月額。初期費用はありません。</p>
+      <p style="font-size: 14px; color: #4A535E; margin: 0 0 36px;">年払いは2ヶ月分お得です。表示はすべて税抜。</p>
+      <div style="display: grid; grid-template-columns: repeat(4, 1fr); gap: 1px; background: #E2E5E9; border: 1px solid #E2E5E9;">
+        <sc-for list="{{ plans }}" as="p" hint-placeholder-count="4">
+          <div style="background: #FFFFFF; padding: 30px 26px 34px; display: flex; flex-direction: column;">
+            <div style="font-size: 15px; font-weight: 700; margin-bottom: 4px;">{{ p.name }}</div>
+            <div style="font-size: 12px; color: #78828E; min-height: 34px; line-height: 1.6;">{{ p.for }}</div>
+            <div style="display: flex; align-items: baseline; gap: 4px; margin: 12px 0 20px; font-variant-numeric: tabular-nums;">
+              <span style="font-size: 32px; font-weight: 700; letter-spacing: 0.01em;">{{ p.price }}</span>
+              <span style="font-size: 13px; color: #4A535E;">{{ p.unit }}</span>
+            </div>
+            <ul style="list-style: none; padding: 0; margin: 0 0 24px; display: flex; flex-direction: column; gap: 10px; flex: 1;">
+              <sc-for list="{{ p.items }}" as="it" hint-placeholder-count="3">
+                <li style="font-size: 13px; color: #4A535E; line-height: 1.7; padding-left: 16px; position: relative;">
+                  <span style="position: absolute; left: 0; top: 8px; width: 6px; height: 6px; background: #C9CFD6; display: block;"></span>{{ it }}
+                </li>
+              </sc-for>
+            </ul>
+            <div onClick="{{ goChecker }}" style="text-align: center; font-size: 14px; font-weight: 500; padding: 12px; border-radius: 4px; border: 1px solid #C9CFD6; cursor: pointer;" style-hover="border-color: #14345C; background: #FAFBFC;">{{ p.cta }}</div>
+          </div>
+        </sc-for>
+      </div>
+    </div>
+  </section>
+
+  <section style="background: #14345C;">
+    <div style="max-width: 1200px; margin: 0 auto; padding: 56px 40px; display: flex; align-items: center; justify-content: space-between; gap: 40px;">
+      <div>
+        <div style="font-size: 24px; font-weight: 700; color: #FFFFFF; margin-bottom: 10px;">まずは1案件、無料で5年分の期限を出す。</div>
+        <div style="font-size: 14px; color: #C4D0E2;">交付決定日と決算月だけで計算できます。登録は結果を保存するときだけ。</div>
+      </div>
+      <span onClick="{{ goChecker }}" style="white-space: nowrap; background: #FFFFFF; color: #14345C; font-size: 15px; font-weight: 700; padding: 15px 30px; border-radius: 4px; cursor: pointer;" style-hover="background: #E8EEF7;">無料で期限を確認する</span>
+    </div>
+  </section>
+
+  <footer style="background: #FFFFFF; border-top: 1px solid #E2E5E9;">
+    <div style="max-width: 1200px; margin: 0 auto; padding: 44px 40px; display: grid; grid-template-columns: 280px repeat(3, 1fr); gap: 40px;">
+      <div>
+        <div style="font-size: 18px; font-weight: 700; color: #14345C; letter-spacing: 0.04em;">ホジョカレ</div>
+        <div style="font-size: 12px; color: #78828E; margin-top: 6px; line-height: 1.8;">補助金採択後の期限・報告管理<br />contact@hojokare.jp ／ 平日 9:00–18:00</div>
+      </div>
+      <sc-for list="{{ footerCols }}" as="c" hint-placeholder-count="3">
+        <div>
+          <div style="font-size: 12px; color: #14181D; font-weight: 700; margin-bottom: 14px;">{{ c.head }}</div>
+          <div style="display: flex; flex-direction: column; gap: 10px;">
+            <sc-for list="{{ c.links }}" as="l" hint-placeholder-count="3">
+              <span style="font-size: 13px; color: #4A535E; cursor: pointer;" style-hover="color: #14345C;">{{ l }}</span>
+            </sc-for>
+          </div>
+        </div>
+      </sc-for>
+    </div>
+    <div style="border-top: 1px solid #E2E5E9; padding: 16px 40px; font-size: 11px; color: #8B949E; text-align: center; line-height: 1.9;">本サービスは期限管理・書類整理のためのツールです。報告書の作成代行・申請代行は行いません。報告義務の履行責任および最終確認はご利用者にあります。</div>
+  </footer>
+</div>
+</sc-if>
+
+<!-- ============ CHECKER ============ -->
+<sc-if value="{{ isChecker }}" hint-placeholder-val="{{ true }}">
+<div style="max-width: 1080px; margin: 0 auto; padding: 40px 40px 80px;">
+  <div style="display: flex; align-items: center; gap: 10px; font-size: 12px; color: #78828E; margin-bottom: 24px;">
+    <span onClick="{{ goLp }}" style="cursor: pointer;" style-hover="color: #14345C;">ホーム</span><span>／</span><span style="color: #14181D;">報告期限チェッカー</span>
+  </div>
+  <div style="display: grid; grid-template-columns: 1fr 320px; gap: 28px; align-items: start;">
+    <div style="background: #FFFFFF; border: 1px solid #E2E5E9; border-radius: 6px;">
+      <div style="padding: 26px 32px; border-bottom: 1px solid #E2E5E9;">
+        <div style="font-size: 22px; font-weight: 700; margin-bottom: 8px;">報告期限チェッカー</div>
+        <p style="font-size: 14px; color: #4A535E; line-height: 1.9; margin: 0;">交付決定日から、実績報告と5年分の事業化状況報告の期限を計算します。</p>
+      </div>
+      <div style="display: flex; align-items: center; gap: 0; padding: 0 32px; border-bottom: 1px solid #E2E5E9; background: #FAFBFC;">
+        <sc-for list="{{ checkerSteps }}" as="st" hint-placeholder-count="3">
+          <div style="display: flex; align-items: center; gap: 10px; padding: 14px 22px 14px 0;">
+            <span style="width: 22px; height: 22px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 11px; font-weight: 700; background: {{ st.bg }}; color: {{ st.fg }};">{{ st.no }}</span>
+            <span style="font-size: 13px; color: {{ st.text }}; font-weight: 500;">{{ st.label }}</span>
+            <span style="width: 32px; height: 1px; background: #D7DCE2; margin-left: 12px;"></span>
+          </div>
+        </sc-for>
+      </div>
+      <div style="padding: 32px;">
+        <sc-for list="{{ checkerFields }}" as="f" hint-placeholder-count="6">
+          <div style="display: grid; grid-template-columns: 190px 1fr; gap: 24px; padding: 18px 0; border-bottom: 1px solid #EFF1F3; align-items: start;">
+            <div style="padding-top: 11px;">
+              <div style="display: flex; align-items: center; gap: 8px;">
+                <span style="font-size: 14px; font-weight: 500;">{{ f.label }}</span>
+                <span style="font-size: 10px; color: #B3261E; border: 1px solid #EBC5C2; padding: 1px 5px; border-radius: 2px;">必須</span>
+              </div>
+            </div>
+            <div>
+              <sc-if value="{{ f.isSelect }}" hint-placeholder-val="{{ true }}">
+                <select style="width: 100%; max-width: 420px; height: 44px; border: 1px solid #C9CFD6; border-radius: 4px; padding: 0 12px; background: #FFFFFF; font-size: 14px;">
+                  <option>{{ f.value }}</option>
+                </select>
+              </sc-if>
+              <sc-if value="{{ f.isInput }}" hint-placeholder-val="{{ true }}">
+                <input type="text" placeholder="{{ f.value }}" style="width: 100%; max-width: 420px; height: 44px; border: 1px solid #C9CFD6; border-radius: 4px; padding: 0 12px; font-size: 14px; font-variant-numeric: tabular-nums;" />
+              </sc-if>
+              <div style="font-size: 12px; color: #78828E; margin-top: 8px; line-height: 1.7;">{{ f.hint }}</div>
+            </div>
+          </div>
+        </sc-for>
+        <div style="display: flex; align-items: center; justify-content: space-between; margin-top: 28px; gap: 24px;">
+          <p style="font-size: 12px; color: #78828E; line-height: 1.8; margin: 0; max-width: 34em;">事務局から個別に通知がある場合はそちらが優先されます。入力いただいたメールアドレスは結果送付と関連する案内にのみ使用します。</p>
+          <div onClick="{{ goResult }}" style="white-space: nowrap; background: #14345C; color: #FFFFFF; font-size: 15px; font-weight: 500; padding: 15px 40px; border-radius: 4px; cursor: pointer;" style-hover="background: #1F5FBF;">期限を計算する</div>
+        </div>
+      </div>
+    </div>
+
+    <div style="display: flex; flex-direction: column; gap: 16px;">
+      <div style="background: #FFFFFF; border: 1px solid #E2E5E9; border-radius: 6px; padding: 22px 24px;">
+        <div style="font-size: 14px; font-weight: 700; margin-bottom: 16px;">この画面でわかること</div>
+        <sc-for list="{{ checkerOutputs }}" as="o" hint-placeholder-count="4">
+          <div style="padding: 12px 0; border-top: 1px solid #EFF1F3;">
+            <div style="font-size: 13px; font-weight: 500; margin-bottom: 4px;">{{ o.title }}</div>
+            <div style="font-size: 12px; color: #78828E; line-height: 1.8;">{{ o.body }}</div>
+          </div>
+        </sc-for>
+      </div>
+      <div style="background: #FAFBFC; border: 1px solid #E2E5E9; border-radius: 6px; padding: 22px 24px;">
+        <div style="font-size: 13px; font-weight: 700; margin-bottom: 12px;">計算のもとにしている資料</div>
+        <div style="font-size: 12px; color: #4A535E; line-height: 2;">公募要領 v6.0（第11回公募）<br />事務処理マニュアル v4.0（実績報告編）<br />事務処理マニュアル v4.0（事業化状況報告編）</div>
+      </div>
+    </div>
+  </div>
+</div>
+</sc-if>
+
+<!-- ============ RESULT ============ -->
+<sc-if value="{{ isResult }}" hint-placeholder-val="{{ true }}">
+<div style="max-width: 1200px; margin: 0 auto; padding: 32px 40px 80px;">
+  <div style="display: flex; align-items: center; gap: 10px; font-size: 12px; color: #78828E; margin-bottom: 20px;">
+    <span onClick="{{ goLp }}" style="cursor: pointer;">ホーム</span><span>／</span><span onClick="{{ goChecker }}" style="cursor: pointer;">報告期限チェッカー</span><span>／</span><span style="color: #14181D;">計算結果</span>
+  </div>
+  <div style="display: grid; grid-template-columns: 1fr 320px; gap: 28px; align-items: start;">
+    <div>
+      <div style="background: #FFFFFF; border: 1px solid #E2E5E9; border-radius: 6px; margin-bottom: 20px;">
+        <div style="padding: 24px 28px 20px; border-bottom: 1px solid #E2E5E9;">
+          <div style="font-size: 22px; font-weight: 700; margin-bottom: 6px;">計算結果</div>
+          <div style="font-size: 13px; color: #4A535E;">入力条件をもとに、報告・手続きの期限を算出しました。</div>
+        </div>
+        <div style="display: grid; grid-template-columns: repeat(5, 1fr); border-bottom: 1px solid #E2E5E9;">
+          <sc-for list="{{ resultConditions }}" as="c" hint-placeholder-count="5">
+            <div style="padding: 16px 20px; border-right: 1px solid #EFF1F3;">
+              <div style="font-size: 11px; color: #78828E; margin-bottom: 6px;">{{ c.label }}</div>
+              <div style="font-size: 14px; font-weight: 500; font-variant-numeric: tabular-nums;">{{ c.value }}</div>
+            </div>
+          </sc-for>
+        </div>
+        <div style="padding: 8px 28px 24px;">
+          <sc-for list="{{ resultGroups }}" as="g" hint-placeholder-count="3">
+            <div style="padding-top: 24px;">
+              <div style="display: flex; align-items: baseline; justify-content: space-between; padding-bottom: 10px; border-bottom: 1px solid #E2E5E9;">
+                <div>
+                  <span style="font-size: 15px; font-weight: 700;">{{ g.title }}</span>
+                  <span style="font-size: 12px; color: #78828E; margin-left: 12px;">{{ g.note }}</span>
+                </div>
+              </div>
+              <sc-for list="{{ g.rows }}" as="r" hint-placeholder-count="5">
+                <div style="display: grid; grid-template-columns: 120px 1fr 120px 96px; align-items: center; padding: 13px 0; border-bottom: 1px solid #F2F4F6; gap: 16px;">
+                  <div style="font-size: 13px; color: #4A535E;">{{ r.label }}</div>
+                  <div style="font-size: 16px; font-weight: 500; font-variant-numeric: tabular-nums; letter-spacing: 0.01em;">{{ r.date }}</div>
+                  <div style="font-size: 13px; color: #4A535E; font-variant-numeric: tabular-nums; text-align: right;">{{ r.left }}</div>
+                  <div style="text-align: right;">
+                    <span style="font-size: 11px; padding: 3px 8px; border-radius: 3px; border: 1px solid {{ r.bd }}; background: {{ r.bg }}; color: {{ r.fg }};">{{ r.status }}</span>
+                  </div>
+                </div>
+              </sc-for>
+            </div>
+          </sc-for>
+        </div>
+      </div>
+
+      <div style="background: #FFFFFF; border: 1px solid #E2E5E9; border-radius: 6px; padding: 22px 28px; margin-bottom: 20px;">
+        <div style="font-size: 13px; font-weight: 700; margin-bottom: 14px;">計算の根拠</div>
+        <div style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px;">
+          <sc-for list="{{ sources }}" as="s" hint-placeholder-count="3">
+            <div style="border-left: 2px solid #D7DCE2; padding-left: 14px;">
+              <div style="font-size: 13px; font-weight: 500; line-height: 1.7; margin-bottom: 6px;">{{ s.title }}</div>
+              <div style="font-size: 12px; color: #78828E; font-variant-numeric: tabular-nums;">{{ s.ref }}</div>
+            </div>
+          </sc-for>
+        </div>
+        <p style="font-size: 11px; color: #8B949E; line-height: 1.9; margin: 18px 0 0; padding-top: 14px; border-top: 1px solid #EFF1F3;">公表資料をもとに自動計算した目安です。最新の要領・手引きおよび事務局からの通知が優先されます。実際の期限は交付申請書・事務局通知でご確認ください。</p>
+      </div>
+
+      <div style="display: flex; gap: 12px;">
+        <span style="border: 1px solid #C9CFD6; background: #FFFFFF; font-size: 14px; padding: 13px 22px; border-radius: 4px; cursor: pointer;" style-hover="border-color: #14345C;">PDFで保存</span>
+        <span style="border: 1px solid #C9CFD6; background: #FFFFFF; font-size: 14px; padding: 13px 22px; border-radius: 4px; color: #4A535E;">メールで送付済み</span>
+        <span onClick="{{ goDash }}" style="background: #14345C; color: #FFFFFF; font-size: 14px; font-weight: 500; padding: 13px 26px; border-radius: 4px; cursor: pointer; margin-left: auto;" style-hover="background: #1F5FBF;">LINEリマインドを設定する（有料版）</span>
+      </div>
+    </div>
+
+    <div style="display: flex; flex-direction: column; gap: 16px;">
+      <div style="background: #FFFFFF; border: 1px solid #E2E5E9; border-radius: 6px; padding: 22px 24px;">
+        <div style="font-size: 14px; font-weight: 700; margin-bottom: 4px;">この先を有料版に任せる</div>
+        <div style="font-size: 12px; color: #78828E; line-height: 1.8; margin-bottom: 8px;">無料アラートは30日前に1通、この案件のみです。</div>
+        <sc-for list="{{ paidPoints }}" as="p" hint-placeholder-count="4">
+          <div style="padding: 12px 0; border-top: 1px solid #EFF1F3;">
+            <div style="font-size: 13px; font-weight: 500; margin-bottom: 4px;">{{ p.title }}</div>
+            <div style="font-size: 12px; color: #78828E; line-height: 1.8;">{{ p.body }}</div>
+          </div>
+        </sc-for>
+        <div style="border-top: 1px solid #EFF1F3; margin-top: 8px; padding-top: 18px;">
+          <div style="display: flex; align-items: baseline; gap: 6px; font-variant-numeric: tabular-nums;">
+            <span style="font-size: 28px; font-weight: 700;">9,800</span>
+            <span style="font-size: 13px; color: #4A535E;">円 / 月・案件（税抜）</span>
+          </div>
+          <div onClick="{{ goDash }}" style="margin-top: 14px; text-align: center; background: #14345C; color: #FFFFFF; font-size: 14px; font-weight: 500; padding: 13px; border-radius: 4px; cursor: pointer;" style-hover="background: #1F5FBF;">管理画面を見る</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+</sc-if>
+
+<!-- ============ APP SHELL ============ -->
+<sc-if value="{{ isApp }}" hint-placeholder-val="{{ true }}">
+<div style="display: grid; grid-template-columns: 216px 1fr; min-height: 100vh;">
+  <aside style="background: #14345C; padding: 0 0 24px; position: sticky; top: 0; height: 100vh; display: flex; flex-direction: column;">
+    <div onClick="{{ goLp }}" style="padding: 22px 22px 20px; cursor: pointer;">
+      <div style="font-size: 19px; font-weight: 700; color: #FFFFFF; letter-spacing: 0.05em;">ホジョカレ</div>
+      <div style="font-size: 10px; color: #93A7C4; margin-top: 5px; letter-spacing: 0.02em;">補助金採択後の期限・報告管理</div>
+    </div>
+    <div style="padding: 0 12px;">
+      <sc-for list="{{ navItems }}" as="n" hint-placeholder-count="7">
+        <div onClick="{{ n.onClick }}" style="display: flex; align-items: center; justify-content: space-between; padding: 10px 12px; border-radius: 4px; cursor: pointer; margin-bottom: 2px; background: {{ n.bg }};">
+          <span style="font-size: 13.5px; color: {{ n.fg }}; font-weight: {{ n.weight }};">{{ n.label }}</span>
+          <span style="font-size: 11px; color: #FFFFFF; background: #B3261E; border-radius: 9px; padding: 1px 7px; opacity: {{ n.badgeOpacity }};">{{ n.badge }}</span>
+        </div>
+      </sc-for>
+    </div>
+    <div style="margin-top: auto; padding: 20px 22px 0; border-top: 1px solid #24487A;">
+      <div style="font-size: 11px; color: #93A7C4; line-height: 1.9;">スタンダード（年払い）<br />管理案件 12 件</div>
+    </div>
+  </aside>
+
+  <div>
+    <header style="height: 60px; background: #FFFFFF; border-bottom: 1px solid #E2E5E9; display: flex; align-items: center; justify-content: space-between; padding: 0 28px; position: sticky; top: 0; z-index: 10;">
+      <div style="display: flex; align-items: center; gap: 10px; border: 1px solid #D7DCE2; border-radius: 4px; padding: 7px 14px; cursor: pointer;" style-hover="border-color: #14345C;">
+        <span style="font-size: 13.5px; font-weight: 500;">{{ orgLabel }}</span>
+        <span style="font-size: 10px; color: #78828E;">▼</span>
+      </div>
+      <div style="display: flex; align-items: center; gap: 22px;">
+        <div style="position: relative; cursor: pointer;">
+          <span style="font-size: 13px; color: #4A535E;">通知</span>
+          <span style="position: absolute; top: -6px; right: -14px; font-size: 10px; background: #B3261E; color: #FFFFFF; border-radius: 8px; padding: 1px 5px;">3</span>
+        </div>
+        <div style="display: flex; align-items: center; gap: 10px; padding-left: 22px; border-left: 1px solid #E2E5E9;">
+          <span style="width: 30px; height: 30px; border-radius: 50%; background: #E4E8ED; display: block;"></span>
+          <div style="line-height: 1.3;">
+            <div style="font-size: 13px; font-weight: 500;">山田 太郎</div>
+            <div style="font-size: 11px; color: #78828E;">{{ roleLabel }}</div>
+          </div>
+        </div>
+      </div>
+    </header>
+
+    <!-- Dashboard -->
+    <sc-if value="{{ isDash }}" hint-placeholder-val="{{ true }}">
+    <main style="padding: 28px;">
+      <div style="display: flex; align-items: flex-end; justify-content: space-between; margin-bottom: 22px;">
+        <div>
+          <h1 style="font-size: 24px; font-weight: 700; margin: 0 0 6px;">ダッシュボード</h1>
+          <div style="font-size: 12px; color: #78828E; font-variant-numeric: tabular-nums;">最終更新 2025/06/23 10:30</div>
+        </div>
+        <div style="display: flex; gap: 10px;">
+          <input type="text" placeholder="案件名・補助金名で検索" style="width: 240px; height: 38px; border: 1px solid #C9CFD6; border-radius: 4px; padding: 0 12px; font-size: 13px;" />
+          <span style="display: flex; align-items: center; border: 1px solid #C9CFD6; background: #FFFFFF; font-size: 13px; padding: 0 16px; border-radius: 4px; cursor: pointer;" style-hover="border-color: #14345C;">CSV出力</span>
+          <span style="display: flex; align-items: center; background: #14345C; color: #FFFFFF; font-size: 13px; font-weight: 500; padding: 0 18px; border-radius: 4px; cursor: pointer;" style-hover="background: #1F5FBF;">＋ 案件を追加</span>
+        </div>
+      </div>
+
+      <div style="display: grid; grid-template-columns: repeat(4, 1fr); gap: 1px; background: #E2E5E9; border: 1px solid #E2E5E9; border-radius: 6px; overflow: hidden; margin-bottom: 22px;">
+        <sc-for list="{{ kpis }}" as="k" hint-placeholder-count="4">
+          <div style="background: #FFFFFF; padding: 18px 22px;">
+            <div style="font-size: 12px; color: #4A535E; margin-bottom: 10px;">{{ k.label }}</div>
+            <div style="display: flex; align-items: baseline; gap: 5px;">
+              <span style="font-size: 30px; font-weight: 700; font-variant-numeric: tabular-nums; color: {{ k.color }};">{{ k.value }}</span>
+              <span style="font-size: 13px; color: #4A535E;">件</span>
+            </div>
+            <div style="font-size: 11px; color: #8B949E; margin-top: 8px;">{{ k.note }}</div>
+          </div>
+        </sc-for>
+      </div>
+
+      <div style="display: grid; grid-template-columns: 1fr 340px; gap: 20px; align-items: start;">
+        <div style="display: flex; flex-direction: column; gap: 20px;">
+          <div style="background: #FFFFFF; border: 1px solid #E2E5E9; border-radius: 6px;">
+            <div style="display: flex; align-items: center; justify-content: space-between; padding: 16px 20px; border-bottom: 1px solid #E2E5E9;">
+              <span style="font-size: 15px; font-weight: 700;">案件 × 期限マトリクス</span>
+              <div style="display: flex; gap: 16px;">
+                <sc-for list="{{ legend }}" as="l" hint-placeholder-count="4">
+                  <span style="display: flex; align-items: center; gap: 6px; font-size: 11px; color: #4A535E;">
+                    <span style="width: 8px; height: 8px; border-radius: 50%; background: {{ l.color }}; display: block;"></span>{{ l.label }}
+                  </span>
+                </sc-for>
+              </div>
+            </div>
+            <table style="width: 100%;">
+              <thead>
+                <tr style="background: #FAFBFC;">
+                  <th style="text-align: left; font-size: 11.5px; font-weight: 500; color: #4A535E; padding: 10px 20px; border-bottom: 1px solid #E2E5E9; width: 220px;">案件 / 補助金</th>
+                  <sc-for list="{{ matrixCols }}" as="c" hint-placeholder-count="6">
+                    <th style="text-align: left; font-size: 11.5px; font-weight: 500; color: #4A535E; padding: 10px 12px; border-bottom: 1px solid #E2E5E9;">{{ c }}</th>
+                  </sc-for>
+                </tr>
+              </thead>
+              <tbody>
+                <sc-for list="{{ matrixRows }}" as="r" hint-placeholder-count="3">
+                  <tr style="border-bottom: 1px solid #F2F4F6;">
+                    <td style="padding: 14px 20px; vertical-align: top;">
+                      <div onClick="{{ goProject }}" style="font-size: 13.5px; font-weight: 500; color: #1F5FBF; cursor: pointer; margin-bottom: 3px;" style-hover="text-decoration: underline;">{{ r.name }}</div>
+                      <div style="font-size: 11.5px; color: #4A535E;">{{ r.grant }}</div>
+                      <div style="font-size: 11px; color: #8B949E; margin-top: 4px; font-variant-numeric: tabular-nums;">{{ r.adopted }}</div>
+                    </td>
+                    <sc-for list="{{ r.cells }}" as="c" hint-placeholder-count="6">
+                      <td style="padding: 14px 12px; vertical-align: top; border-left: 1px solid #F2F4F6;">
+                        <div style="display: flex; align-items: center; gap: 6px; margin-bottom: 4px;">
+                          <span style="width: 7px; height: 7px; border-radius: 50%; background: {{ c.color }}; display: block; flex: none;"></span>
+                          <span style="font-size: 11.5px; color: {{ c.color }}; font-weight: 500;">{{ c.status }}</span>
+                        </div>
+                        <div style="font-size: 12px; font-variant-numeric: tabular-nums; color: #14181D;">{{ c.date }}</div>
+                        <div style="font-size: 11px; color: #8B949E; font-variant-numeric: tabular-nums; margin-top: 2px;">{{ c.left }}</div>
+                      </td>
+                    </sc-for>
+                  </tr>
+                </sc-for>
+              </tbody>
+            </table>
+            <div onClick="{{ goProject }}" style="padding: 12px; text-align: center; font-size: 13px; color: #1F5FBF; cursor: pointer; border-top: 1px solid #E2E5E9;" style-hover="background: #FAFBFC;">すべての案件を確認する</div>
+          </div>
+
+          <div style="background: #FFFFFF; border: 1px solid #E2E5E9; border-radius: 6px;">
+            <div style="padding: 16px 20px; border-bottom: 1px solid #E2E5E9; font-size: 15px; font-weight: 700;">チェックリストの進捗</div>
+            <div style="display: grid; grid-template-columns: repeat(3, 1fr) 1.4fr; gap: 1px; background: #EFF1F3;">
+              <sc-for list="{{ checkStats }}" as="s" hint-placeholder-count="3">
+                <div style="background: #FFFFFF; padding: 20px;">
+                  <div style="font-size: 12px; color: #4A535E; margin-bottom: 8px;">{{ s.label }}</div>
+                  <div style="display: flex; align-items: baseline; gap: 5px;">
+                    <span style="font-size: 26px; font-weight: 700; font-variant-numeric: tabular-nums; color: {{ s.color }};">{{ s.value }}</span>
+                    <span style="font-size: 12px; color: #4A535E;">件</span>
+                  </div>
+                  <div style="font-size: 11px; color: #8B949E; margin-top: 6px;">{{ s.note }}</div>
+                </div>
+              </sc-for>
+              <div style="background: #FFFFFF; padding: 20px;">
+                <div style="font-size: 12px; color: #4A535E; margin-bottom: 12px;">最近更新したチェックリスト</div>
+                <sc-for list="{{ recentLists }}" as="rl" hint-placeholder-count="3">
+                  <div style="display: flex; justify-content: space-between; font-size: 12px; padding: 4px 0;">
+                    <span onClick="{{ goChecklist }}" style="color: #1F5FBF; cursor: pointer;">{{ rl.name }}</span>
+                    <span style="color: #8B949E; font-variant-numeric: tabular-nums;">{{ rl.date }}</span>
+                  </div>
+                </sc-for>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div style="display: flex; flex-direction: column; gap: 20px;">
+          <div style="background: #FFFFFF; border: 1px solid #E2E5E9; border-radius: 6px;">
+            <div style="display: flex; align-items: center; justify-content: space-between; padding: 16px 20px; border-bottom: 1px solid #E2E5E9;">
+              <span style="font-size: 15px; font-weight: 700;">直近90日の期限</span>
+              <span style="font-size: 12px; color: #1F5FBF; cursor: pointer;">すべて見る</span>
+            </div>
+            <sc-for list="{{ upcoming }}" as="u" hint-placeholder-count="5">
+              <div onClick="{{ goProject }}" style="display: grid; grid-template-columns: 56px 1fr; gap: 14px; padding: 14px 20px; border-bottom: 1px solid #F2F4F6; border-left: 3px solid {{ u.color }}; cursor: pointer;" style-hover="background: #FAFBFC;">
+                <div style="text-align: center;">
+                  <div style="font-size: 10px; color: #8B949E;">あと</div>
+                  <div style="font-size: 20px; font-weight: 700; font-variant-numeric: tabular-nums; color: {{ u.color }}; line-height: 1.2;">{{ u.days }}</div>
+                  <div style="font-size: 10px; color: #8B949E;">日</div>
+                </div>
+                <div>
+                  <div style="font-size: 13.5px; font-weight: 500; margin-bottom: 4px;">{{ u.title }}</div>
+                  <div style="font-size: 11.5px; color: #4A535E; line-height: 1.6;">{{ u.sub }}</div>
+                  <div style="font-size: 11px; color: #8B949E; margin-top: 4px; font-variant-numeric: tabular-nums;">期限 {{ u.due }}</div>
+                </div>
+              </div>
+            </sc-for>
+          </div>
+
+          <div style="background: #FFFFFF; border: 1px solid #E2E5E9; border-radius: 6px;">
+            <div style="display: flex; align-items: center; justify-content: space-between; padding: 16px 20px; border-bottom: 1px solid #E2E5E9;">
+              <span style="font-size: 15px; font-weight: 700;">未収集の証憑</span>
+              <span style="font-size: 12px; color: #1F5FBF; cursor: pointer;">証憑ボックス</span>
+            </div>
+            <sc-for list="{{ missingDocs }}" as="m" hint-placeholder-count="4">
+              <div style="display: flex; align-items: center; justify-content: space-between; padding: 13px 20px; border-bottom: 1px solid #F2F4F6;">
+                <span style="font-size: 13px;">{{ m.name }}</span>
+                <div style="display: flex; align-items: baseline; gap: 12px;">
+                  <span style="font-size: 11px; color: {{ m.warnColor }};">{{ m.warn }}</span>
+                  <span style="font-size: 15px; font-weight: 700; font-variant-numeric: tabular-nums;">{{ m.count }}</span>
+                </div>
+              </div>
+            </sc-for>
+          </div>
+        </div>
+      </div>
+    </main>
+    </sc-if>
+
+    <!-- Project detail -->
+    <sc-if value="{{ isProject }}" hint-placeholder-val="{{ true }}">
+    <main style="padding: 28px;">
+      <div style="font-size: 12px; color: #78828E; margin-bottom: 14px;">
+        <span onClick="{{ goDash }}" style="cursor: pointer;">ダッシュボード</span> ／ 案件一覧 ／ <span style="color: #14181D;">案件詳細</span>
+      </div>
+      <div style="display: flex; align-items: flex-start; justify-content: space-between; margin-bottom: 18px;">
+        <div>
+          <h1 style="font-size: 24px; font-weight: 700; margin: 0 0 6px;">株式会社東海精密 ／ 事業再構築 第11回</h1>
+          <div style="font-size: 12px; color: #78828E;">補助事業実施中・担当 山田 太郎</div>
+        </div>
+        <span style="border: 1px solid #C9CFD6; background: #FFFFFF; font-size: 13px; padding: 9px 18px; border-radius: 4px; cursor: pointer;" style-hover="border-color: #14345C;">案件情報を編集</span>
+      </div>
+
+      <div style="display: grid; grid-template-columns: repeat(6, 1fr); gap: 1px; background: #E2E5E9; border: 1px solid #E2E5E9; border-radius: 6px; overflow: hidden; margin-bottom: 20px;">
+        <sc-for list="{{ projectMeta }}" as="m" hint-placeholder-count="6">
+          <div style="background: #FFFFFF; padding: 14px 18px;">
+            <div style="font-size: 11px; color: #78828E; margin-bottom: 6px;">{{ m.label }}</div>
+            <div style="font-size: 14px; font-weight: 500; font-variant-numeric: tabular-nums;">{{ m.value }}</div>
+          </div>
+        </sc-for>
+      </div>
+
+      <div style="display: flex; gap: 4px; border-bottom: 1px solid #E2E5E9; margin-bottom: 20px;">
+        <sc-for list="{{ projectTabs }}" as="t" hint-placeholder-count="4">
+          <div onClick="{{ t.onClick }}" style="font-size: 14px; padding: 12px 20px; cursor: pointer; color: {{ t.fg }}; font-weight: {{ t.weight }}; border-bottom: 2px solid {{ t.bd }}; margin-bottom: -1px;">{{ t.label }}</div>
+        </sc-for>
+      </div>
+
+      <div style="display: grid; grid-template-columns: 1fr 340px; gap: 20px; align-items: start;">
+        <div style="background: #FFFFFF; border: 1px solid #E2E5E9; border-radius: 6px;">
+          <div style="display: flex; align-items: center; justify-content: space-between; padding: 16px 20px; border-bottom: 1px solid #E2E5E9;">
+            <div>
+              <span style="font-size: 15px; font-weight: 700;">期限一覧</span>
+              <span style="font-size: 11.5px; color: #78828E; margin-left: 12px;">上書きした期限は履歴として記録されます</span>
+            </div>
+            <span style="border: 1px solid #C9CFD6; font-size: 12.5px; padding: 7px 14px; border-radius: 4px; cursor: pointer;" style-hover="border-color: #14345C;">期限を上書き</span>
+          </div>
+          <table style="width: 100%;">
+            <thead>
+              <tr style="background: #FAFBFC;">
+                <th style="text-align: left; font-size: 11.5px; font-weight: 500; color: #4A535E; padding: 10px 20px; border-bottom: 1px solid #E2E5E9;">項目</th>
+                <th style="text-align: left; font-size: 11.5px; font-weight: 500; color: #4A535E; padding: 10px 12px; border-bottom: 1px solid #E2E5E9;">期限</th>
+                <th style="text-align: left; font-size: 11.5px; font-weight: 500; color: #4A535E; padding: 10px 12px; border-bottom: 1px solid #E2E5E9;">ステータス</th>
+                <th style="text-align: left; font-size: 11.5px; font-weight: 500; color: #4A535E; padding: 10px 12px; border-bottom: 1px solid #E2E5E9;">リマインド</th>
+                <th style="text-align: left; font-size: 11.5px; font-weight: 500; color: #4A535E; padding: 10px 12px; border-bottom: 1px solid #E2E5E9;">担当</th>
+                <th style="text-align: left; font-size: 11.5px; font-weight: 500; color: #4A535E; padding: 10px 20px; border-bottom: 1px solid #E2E5E9;">根拠</th>
+              </tr>
+            </thead>
+            <tbody>
+              <sc-for list="{{ deadlineRows }}" as="d" hint-placeholder-count="9">
+                <tr style="border-bottom: 1px solid #F2F4F6; background: {{ d.rowBg }};">
+                  <td style="padding: 13px 20px; font-size: 13.5px;">{{ d.label }}</td>
+                  <td style="padding: 13px 12px;">
+                    <div style="font-size: 13.5px; font-variant-numeric: tabular-nums;">{{ d.date }}</div>
+                    <div style="font-size: 11px; color: #8B949E; font-variant-numeric: tabular-nums;">{{ d.left }}</div>
+                  </td>
+                  <td style="padding: 13px 12px;">
+                    <span style="display: inline-flex; align-items: center; gap: 6px; font-size: 12px; color: {{ d.color }};">
+                      <span style="width: 7px; height: 7px; border-radius: 50%; background: {{ d.color }}; display: block;"></span>{{ d.status }}
+                    </span>
+                  </td>
+                  <td style="padding: 13px 12px; font-size: 11.5px; color: #4A535E; font-variant-numeric: tabular-nums;">{{ d.remind }}</td>
+                  <td style="padding: 13px 12px; font-size: 12.5px; color: #4A535E;">{{ d.owner }}</td>
+                  <td style="padding: 13px 20px; font-size: 12px;"><span style="color: #1F5FBF; cursor: pointer;">{{ d.source }}</span></td>
+                </tr>
+              </sc-for>
+            </tbody>
+          </table>
+          <div style="padding: 12px 20px; font-size: 11px; color: #8B949E;">ステータスは自動で更新されます。事務局からの個別通知がある場合は、上書き機能で調整してください。</div>
+        </div>
+
+        <div style="display: flex; flex-direction: column; gap: 20px;">
+          <div style="background: #FFFFFF; border: 1px solid #E2E5E9; border-radius: 6px;">
+            <div style="padding: 16px 20px; border-bottom: 1px solid #E2E5E9; font-size: 15px; font-weight: 700;">次にやること</div>
+            <sc-for list="{{ nextTasks }}" as="t" hint-placeholder-count="3">
+              <div style="padding: 14px 20px; border-bottom: 1px solid #F2F4F6; border-left: 3px solid {{ t.color }};">
+                <div style="font-size: 11px; color: {{ t.color }}; margin-bottom: 5px;">{{ t.tag }}</div>
+                <div style="display: flex; align-items: center; justify-content: space-between; gap: 12px;">
+                  <div>
+                    <div style="font-size: 13.5px; font-weight: 500;">{{ t.title }}</div>
+                    <div style="font-size: 11.5px; color: #8B949E; margin-top: 3px; font-variant-numeric: tabular-nums;">{{ t.due }}</div>
+                  </div>
+                  <span onClick="{{ goChecklist }}" style="white-space: nowrap; border: 1px solid #C9CFD6; font-size: 12px; padding: 6px 14px; border-radius: 4px; cursor: pointer;" style-hover="border-color: #14345C;">対応する</span>
+                </div>
+              </div>
+            </sc-for>
+          </div>
+
+          <div style="background: #FFFFFF; border: 1px solid #E2E5E9; border-radius: 6px;">
+            <div style="padding: 16px 20px; border-bottom: 1px solid #E2E5E9; font-size: 15px; font-weight: 700;">リマインド送信予定（実績報告）</div>
+            <sc-for list="{{ reminderRows }}" as="r" hint-placeholder-count="6">
+              <div style="display: grid; grid-template-columns: 70px 1fr auto; gap: 12px; align-items: center; padding: 11px 20px; border-bottom: 1px solid #F2F4F6;">
+                <span style="font-size: 12.5px; color: #4A535E;">{{ r.timing }}</span>
+                <span style="font-size: 12.5px; font-variant-numeric: tabular-nums;">{{ r.date }}</span>
+                <span style="font-size: 11.5px; color: {{ r.color }};">{{ r.state }}</span>
+              </div>
+            </sc-for>
+          </div>
+        </div>
+      </div>
+    </main>
+    </sc-if>
+
+    <!-- Checklist -->
+    <sc-if value="{{ isChecklist }}" hint-placeholder-val="{{ true }}">
+    <main style="padding: 28px;">
+      <div style="font-size: 12px; color: #78828E; margin-bottom: 14px;">
+        <span onClick="{{ goDash }}" style="cursor: pointer;">ダッシュボード</span> ／ <span onClick="{{ goProject }}" style="cursor: pointer;">案件詳細</span> ／ <span style="color: #14181D;">チェックリスト</span>
+      </div>
+      <h1 style="font-size: 24px; font-weight: 700; margin: 0 0 18px;">株式会社東海精密 ／ 事業再構築 第11回</h1>
+
+      <div style="display: flex; gap: 4px; border-bottom: 1px solid #E2E5E9; margin-bottom: 20px;">
+        <sc-for list="{{ checklistTabs }}" as="t" hint-placeholder-count="4">
+          <div onClick="{{ t.onClick }}" style="font-size: 14px; padding: 12px 20px; cursor: pointer; color: {{ t.fg }}; font-weight: {{ t.weight }}; border-bottom: 2px solid {{ t.bd }}; margin-bottom: -1px;">{{ t.label }}</div>
+        </sc-for>
+      </div>
+
+      <div style="display: grid; grid-template-columns: 1fr 320px; gap: 20px; align-items: start;">
+        <div style="display: flex; flex-direction: column; gap: 20px;">
+          <div style="background: #FFFFFF; border: 1px solid #E2E5E9; border-radius: 6px; padding: 22px 24px;">
+            <div style="display: flex; align-items: center; justify-content: space-between; margin-bottom: 18px;">
+              <span style="font-size: 15px; font-weight: 700;">実績報告チェックリストの進捗</span>
+              <span style="font-size: 12px; color: #4A535E; font-variant-numeric: tabular-nums;">提出期限 2025/06/30（あと7日）</span>
+            </div>
+            <div style="display: flex; align-items: baseline; gap: 10px; margin-bottom: 10px;">
+              <span style="font-size: 34px; font-weight: 700; font-variant-numeric: tabular-nums;">62%</span>
+              <span style="font-size: 13px; color: #4A535E; font-variant-numeric: tabular-nums;">28 / 45 件が揃っています</span>
+            </div>
+            <div style="height: 8px; background: #EFF1F3; border-radius: 4px; overflow: hidden; display: flex;">
+              <span style="width: 62%; background: #14345C; display: block;"></span>
+              <span style="width: 20%; background: #C9A227; display: block;"></span>
+            </div>
+            <div style="display: flex; gap: 28px; margin-top: 16px;">
+              <sc-for list="{{ checklistSummary }}" as="c" hint-placeholder-count="3">
+                <div style="display: flex; align-items: center; gap: 8px;">
+                  <span style="width: 8px; height: 8px; border-radius: 50%; background: {{ c.color }}; display: block;"></span>
+                  <span style="font-size: 12.5px; color: #4A535E;">{{ c.label }}</span>
+                  <span style="font-size: 14px; font-weight: 700; font-variant-numeric: tabular-nums;">{{ c.value }}</span>
+                </div>
+              </sc-for>
+            </div>
+          </div>
+
+          <div style="background: #FFFFFF; border: 1px solid #E2E5E9; border-radius: 6px;">
+            <div style="display: flex; gap: 6px; padding: 14px 20px; border-bottom: 1px solid #E2E5E9; align-items: center;">
+              <span style="font-size: 12px; color: #78828E; margin-right: 8px;">報告サイクル</span>
+              <sc-for list="{{ cycleTabs }}" as="c" hint-placeholder-count="6">
+                <span style="font-size: 12.5px; padding: 6px 14px; border-radius: 4px; cursor: pointer; border: 1px solid {{ c.bd }}; background: {{ c.bg }}; color: {{ c.fg }};">{{ c.label }}</span>
+              </sc-for>
+            </div>
+            <table style="width: 100%;">
+              <thead>
+                <tr style="background: #FAFBFC;">
+                  <th style="text-align: left; font-size: 11.5px; font-weight: 500; color: #4A535E; padding: 10px 20px; border-bottom: 1px solid #E2E5E9;">必要証憑（制度マスタ）</th>
+                  <th style="text-align: left; font-size: 11.5px; font-weight: 500; color: #4A535E; padding: 10px 12px; border-bottom: 1px solid #E2E5E9;">状態</th>
+                  <th style="text-align: left; font-size: 11.5px; font-weight: 500; color: #4A535E; padding: 10px 12px; border-bottom: 1px solid #E2E5E9;">ファイル</th>
+                  <th style="text-align: left; font-size: 11.5px; font-weight: 500; color: #4A535E; padding: 10px 12px; border-bottom: 1px solid #E2E5E9;">担当</th>
+                  <th style="text-align: left; font-size: 11.5px; font-weight: 500; color: #4A535E; padding: 10px 12px; border-bottom: 1px solid #E2E5E9;">最終催促</th>
+                  <th style="text-align: right; font-size: 11.5px; font-weight: 500; color: #4A535E; padding: 10px 20px; border-bottom: 1px solid #E2E5E9;"></th>
+                </tr>
+              </thead>
+              <tbody>
+                <sc-for list="{{ checklistRows }}" as="r" hint-placeholder-count="8">
+                  <tr style="border-bottom: 1px solid #F2F4F6;">
+                    <td style="padding: 13px 20px; font-size: 13.5px;">{{ r.name }}</td>
+                    <td style="padding: 13px 12px;">
+                      <span style="display: inline-flex; align-items: center; gap: 6px; font-size: 12px; color: {{ r.color }};">
+                        <span style="width: 7px; height: 7px; border-radius: 50%; background: {{ r.color }}; display: block;"></span>{{ r.state }}
+                      </span>
+                    </td>
+                    <td style="padding: 13px 12px; font-size: 12.5px; color: {{ r.fileColor }};">{{ r.file }}</td>
+                    <td style="padding: 13px 12px; font-size: 12.5px; color: #4A535E;">{{ r.owner }}</td>
+                    <td style="padding: 13px 12px; font-size: 11.5px; color: #8B949E; font-variant-numeric: tabular-nums;">{{ r.last }}</td>
+                    <td style="padding: 13px 20px; text-align: right;">
+                      <span style="font-size: 12px; border: 1px solid #C9CFD6; padding: 5px 12px; border-radius: 4px; cursor: pointer; white-space: nowrap;" style-hover="border-color: #14345C; background: #FAFBFC;">LINEで催促</span>
+                    </td>
+                  </tr>
+                </sc-for>
+              </tbody>
+            </table>
+          </div>
+        </div>
+
+        <div style="display: flex; flex-direction: column; gap: 20px;">
+          <div style="background: #FFFFFF; border: 1px solid #E2E5E9; border-radius: 6px; padding: 20px;">
+            <div style="font-size: 15px; font-weight: 700; margin-bottom: 8px;">不足分だけを催促する</div>
+            <p style="font-size: 12px; color: #4A535E; line-height: 1.9; margin: 0 0 16px;">未収集・確認中の証憑だけをまとめて、担当者へ送ります。</p>
+            <div style="border: 1px solid #EBC5C2; background: #FCF4F3; border-radius: 4px; padding: 14px; margin-bottom: 14px;">
+              <div style="font-size: 12px; color: #B3261E; margin-bottom: 4px;">未収集・確認中の証憑</div>
+              <div style="font-size: 24px; font-weight: 700; font-variant-numeric: tabular-nums;">17 件</div>
+            </div>
+            <div style="display: flex; flex-direction: column; gap: 8px;">
+              <span style="text-align: center; background: #14345C; color: #FFFFFF; font-size: 13.5px; font-weight: 500; padding: 12px; border-radius: 4px; cursor: pointer;" style-hover="background: #1F5FBF;">LINEでまとめて催促</span>
+              <span style="text-align: center; border: 1px solid #C9CFD6; font-size: 13.5px; padding: 12px; border-radius: 4px; cursor: pointer;" style-hover="border-color: #14345C;">メールでまとめて催促</span>
+            </div>
+          </div>
+
+          <div style="background: #FFFFFF; border: 1px solid #E2E5E9; border-radius: 6px;">
+            <div style="padding: 16px 20px; border-bottom: 1px solid #E2E5E9; font-size: 15px; font-weight: 700;">最近追加された証憑</div>
+            <sc-for list="{{ recentDocs }}" as="d" hint-placeholder-count="4">
+              <div style="padding: 12px 20px; border-bottom: 1px solid #F2F4F6;">
+                <div style="font-size: 13px; margin-bottom: 3px;">{{ d.name }}</div>
+                <div style="font-size: 11px; color: #8B949E; font-variant-numeric: tabular-nums;">{{ d.by }}</div>
+              </div>
+            </sc-for>
+          </div>
+
+          <div style="background: #FAFBFC; border: 1px solid #E2E5E9; border-radius: 6px; padding: 20px;">
+            <div style="font-size: 14px; font-weight: 700; margin-bottom: 12px;">報告前の確認メモ</div>
+            <sc-for list="{{ memos }}" as="m" hint-placeholder-count="3">
+              <div style="font-size: 12.5px; color: #4A535E; line-height: 1.8; padding: 6px 0 6px 16px; position: relative;">
+                <span style="position: absolute; left: 0; top: 12px; width: 6px; height: 6px; background: #C9CFD6; display: block;"></span>{{ m }}
+              </div>
+            </sc-for>
+          </div>
+        </div>
+      </div>
+    </main>
+    </sc-if>
+
+    <!-- Settings -->
+    <sc-if value="{{ isSettings }}" hint-placeholder-val="{{ true }}">
+    <main style="padding: 28px;">
+      <h1 style="font-size: 24px; font-weight: 700; margin: 0 0 20px;">設定</h1>
+      <div style="display: grid; grid-template-columns: 180px 1fr; gap: 24px; align-items: start;">
+        <div style="background: #FFFFFF; border: 1px solid #E2E5E9; border-radius: 6px; overflow: hidden;">
+          <sc-for list="{{ settingsNav }}" as="s" hint-placeholder-count="5">
+            <div style="padding: 12px 18px; font-size: 13.5px; border-bottom: 1px solid #F2F4F6; cursor: pointer; background: {{ s.bg }}; color: {{ s.fg }}; font-weight: {{ s.weight }};">{{ s.label }}</div>
+          </sc-for>
+        </div>
+        <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 20px; align-items: start;">
+          <div style="background: #FFFFFF; border: 1px solid #E2E5E9; border-radius: 6px;">
+            <div style="padding: 16px 20px; border-bottom: 1px solid #E2E5E9; font-size: 15px; font-weight: 700;">組織情報</div>
+            <sc-for list="{{ orgInfo }}" as="o" hint-placeholder-count="5">
+              <div style="display: grid; grid-template-columns: 150px 1fr; padding: 13px 20px; border-bottom: 1px solid #F2F4F6; gap: 12px;">
+                <span style="font-size: 12.5px; color: #78828E;">{{ o.label }}</span>
+                <span style="font-size: 13.5px;">{{ o.value }}</span>
+              </div>
+            </sc-for>
+          </div>
+
+          <div style="background: #FFFFFF; border: 1px solid #E2E5E9; border-radius: 6px;">
+            <div style="display: flex; align-items: center; justify-content: space-between; padding: 16px 20px; border-bottom: 1px solid #E2E5E9;">
+              <span style="font-size: 15px; font-weight: 700;">メンバー</span>
+              <span style="font-size: 12.5px; border: 1px solid #C9CFD6; padding: 6px 14px; border-radius: 4px; cursor: pointer;" style-hover="border-color: #14345C;">＋ 招待</span>
+            </div>
+            <sc-for list="{{ members }}" as="m" hint-placeholder-count="5">
+              <div style="display: grid; grid-template-columns: 1fr 70px 84px; padding: 12px 20px; border-bottom: 1px solid #F2F4F6; gap: 10px; align-items: center;">
+                <div>
+                  <div style="font-size: 13px;">{{ m.name }}</div>
+                  <div style="font-size: 11px; color: #8B949E;">{{ m.mail }}</div>
+                </div>
+                <span style="font-size: 11.5px; color: #4A535E;">{{ m.role }}</span>
+                <span style="font-size: 11.5px; color: {{ m.color }};">{{ m.state }}</span>
+              </div>
+            </sc-for>
+          </div>
+
+          <div style="background: #FFFFFF; border: 1px solid #E2E5E9; border-radius: 6px;">
+            <div style="display: flex; align-items: center; justify-content: space-between; padding: 16px 20px; border-bottom: 1px solid #E2E5E9;">
+              <span style="font-size: 15px; font-weight: 700;">LINE接続</span>
+              <span style="font-size: 12px; color: #1B6B48;">接続済み</span>
+            </div>
+            <div style="padding: 20px; display: grid; grid-template-columns: 110px 1fr; gap: 18px;">
+              <div style="width: 110px; height: 110px; border: 1px solid #E2E5E9; background: #FAFBFC; display: flex; align-items: center; justify-content: center; font-size: 10px; color: #A6AEB8;">QRコード</div>
+              <div>
+                <div style="font-size: 12.5px; color: #4A535E; line-height: 2;">接続ユーザー　山田 太郎<br />接続日時　2024/11/12 14:05</div>
+                <p style="font-size: 11.5px; color: #8B949E; line-height: 1.8; margin: 12px 0 0;">接続を解除すると、期限リマインドと証憑の受け取りができなくなります。</p>
+              </div>
+            </div>
+          </div>
+
+          <div style="background: #FFFFFF; border: 1px solid #E2E5E9; border-radius: 6px;">
+            <div style="padding: 16px 20px; border-bottom: 1px solid #E2E5E9; font-size: 15px; font-weight: 700;">通知タイミング</div>
+            <table style="width: 100%;">
+              <thead>
+                <tr style="background: #FAFBFC;">
+                  <th style="text-align: left; font-size: 11.5px; font-weight: 500; color: #4A535E; padding: 9px 20px; border-bottom: 1px solid #E2E5E9;">チャネル</th>
+                  <sc-for list="{{ notifyCols }}" as="c" hint-placeholder-count="6">
+                    <th style="text-align: center; font-size: 11.5px; font-weight: 500; color: #4A535E; padding: 9px 4px; border-bottom: 1px solid #E2E5E9;">{{ c }}</th>
+                  </sc-for>
+                </tr>
+              </thead>
+              <tbody>
+                <sc-for list="{{ notifyRows }}" as="r" hint-placeholder-count="2">
+                  <tr style="border-bottom: 1px solid #F2F4F6;">
+                    <td style="padding: 12px 20px;">
+                      <div style="font-size: 13px;">{{ r.channel }}</div>
+                      <div style="font-size: 11px; color: #8B949E;">{{ r.dest }}</div>
+                    </td>
+                    <sc-for list="{{ r.cells }}" as="c" hint-placeholder-count="6">
+                      <td style="text-align: center; padding: 12px 4px;">
+                        <span style="display: inline-block; width: 16px; height: 16px; border-radius: 3px; border: 1px solid {{ c.bd }}; background: {{ c.bg }};"></span>
+                      </td>
+                    </sc-for>
+                  </tr>
+                </sc-for>
+              </tbody>
+            </table>
+          </div>
+
+          <div style="background: #FFFFFF; border: 1px solid #E2E5E9; border-radius: 6px;">
+            <div style="padding: 16px 20px; border-bottom: 1px solid #E2E5E9; font-size: 15px; font-weight: 700;">請求</div>
+            <div style="padding: 20px;">
+              <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 18px; margin-bottom: 18px;">
+                <div>
+                  <div style="font-size: 11.5px; color: #78828E; margin-bottom: 5px;">現在のプラン</div>
+                  <div style="font-size: 14px; font-weight: 500;">スタンダード（年払い）</div>
+                </div>
+                <div>
+                  <div style="font-size: 11.5px; color: #78828E; margin-bottom: 5px;">次回請求日</div>
+                  <div style="font-size: 14px; font-weight: 500; font-variant-numeric: tabular-nums;">2025/07/01</div>
+                </div>
+              </div>
+              <div style="font-size: 11.5px; color: #78828E; margin-bottom: 6px;">管理案件数（上限100件）</div>
+              <div style="height: 8px; background: #EFF1F3; border-radius: 4px; overflow: hidden; margin-bottom: 6px;"><span style="width: 68%; background: #14345C; display: block; height: 100%;"></span></div>
+              <div style="font-size: 12px; color: #4A535E; font-variant-numeric: tabular-nums; margin-bottom: 18px;">68 件 使用中 ／ 残り 32 件</div>
+              <div style="display: flex; gap: 8px;">
+                <span style="font-size: 12.5px; border: 1px solid #C9CFD6; padding: 9px 16px; border-radius: 4px; cursor: pointer;" style-hover="border-color: #14345C;">プラン変更</span>
+                <span style="font-size: 12.5px; border: 1px solid #C9CFD6; padding: 9px 16px; border-radius: 4px; cursor: pointer;" style-hover="border-color: #14345C;">請求書をダウンロード</span>
+              </div>
+            </div>
+          </div>
+
+          <div style="background: #FAFBFC; border: 1px solid #E2E5E9; border-radius: 6px; padding: 20px;">
+            <div style="font-size: 15px; font-weight: 700; margin-bottom: 12px;">データの取り扱い</div>
+            <sc-for list="{{ dataNotes }}" as="d" hint-placeholder-count="3">
+              <div style="font-size: 12.5px; color: #4A535E; line-height: 1.9; padding: 6px 0 6px 16px; position: relative;">
+                <span style="position: absolute; left: 0; top: 12px; width: 6px; height: 6px; background: #C9CFD6; display: block;"></span>{{ d }}
+              </div>
+            </sc-for>
+          </div>
+        </div>
+      </div>
+    </main>
+    </sc-if>
+
+    <!-- Firm dashboard -->
+    <sc-if value="{{ isFirm }}" hint-placeholder-val="{{ true }}">
+    <main style="padding: 28px;">
+      <div style="display: flex; align-items: flex-end; justify-content: space-between; margin-bottom: 22px;">
+        <div>
+          <h1 style="font-size: 24px; font-weight: 700; margin: 0 0 6px;">士業ダッシュボード</h1>
+          <div style="font-size: 12px; color: #78828E;">顧問先12社・48案件を横断して確認できます</div>
+        </div>
+        <div style="display: flex; gap: 10px;">
+          <span style="display: flex; align-items: center; border: 1px solid #C9CFD6; background: #FFFFFF; font-size: 13px; padding: 0 16px; height: 38px; border-radius: 4px; cursor: pointer;" style-hover="border-color: #14345C;">一括CSV出力</span>
+          <span style="display: flex; align-items: center; border: 1px solid #C9CFD6; background: #FFFFFF; font-size: 13px; padding: 0 16px; height: 38px; border-radius: 4px; cursor: pointer;" style-hover="border-color: #14345C;">顧問先招待リンク</span>
+          <span style="display: flex; align-items: center; background: #14345C; color: #FFFFFF; font-size: 13px; font-weight: 500; padding: 0 18px; height: 38px; border-radius: 4px; cursor: pointer;" style-hover="background: #1F5FBF;">＋ 顧問先を追加</span>
+        </div>
+      </div>
+
+      <div style="display: grid; grid-template-columns: repeat(4, 1fr); gap: 1px; background: #E2E5E9; border: 1px solid #E2E5E9; border-radius: 6px; overflow: hidden; margin-bottom: 22px;">
+        <sc-for list="{{ firmKpis }}" as="k" hint-placeholder-count="4">
+          <div style="background: #FFFFFF; padding: 18px 22px;">
+            <div style="font-size: 12px; color: #4A535E; margin-bottom: 10px;">{{ k.label }}</div>
+            <div style="display: flex; align-items: baseline; gap: 5px;">
+              <span style="font-size: 30px; font-weight: 700; font-variant-numeric: tabular-nums; color: {{ k.color }};">{{ k.value }}</span>
+              <span style="font-size: 13px; color: #4A535E;">{{ k.unit }}</span>
+            </div>
+            <div style="font-size: 11px; color: #8B949E; margin-top: 8px;">{{ k.note }}</div>
+          </div>
+        </sc-for>
+      </div>
+
+      <div style="display: grid; grid-template-columns: 1fr 340px; gap: 20px; align-items: start;">
+        <div style="display: flex; flex-direction: column; gap: 20px;">
+          <div style="background: #FFFFFF; border: 1px solid #E2E5E9; border-radius: 6px;">
+            <div style="display: flex; align-items: center; justify-content: space-between; padding: 16px 20px; border-bottom: 1px solid #E2E5E9;">
+              <span style="font-size: 15px; font-weight: 700;">顧問先ポートフォリオ</span>
+              <div style="display: flex; gap: 8px;">
+                <sc-for list="{{ firmFilters }}" as="f" hint-placeholder-count="4">
+                  <select style="height: 32px; border: 1px solid #C9CFD6; border-radius: 4px; font-size: 12px; padding: 0 8px; background: #FFFFFF;"><option>{{ f }}</option></select>
+                </sc-for>
+              </div>
+            </div>
+            <table style="width: 100%;">
+              <thead>
+                <tr style="background: #FAFBFC;">
+                  <sc-for list="{{ firmCols }}" as="c" hint-placeholder-count="7">
+                    <th style="text-align: left; font-size: 11.5px; font-weight: 500; color: #4A535E; padding: 10px 14px; border-bottom: 1px solid #E2E5E9;">{{ c }}</th>
+                  </sc-for>
+                </tr>
+              </thead>
+              <tbody>
+                <sc-for list="{{ firmRows }}" as="r" hint-placeholder-count="4">
+                  <tr style="border-bottom: 1px solid #F2F4F6;">
+                    <td style="padding: 14px;">
+                      <div style="font-size: 13.5px; font-weight: 500; color: #1F5FBF; cursor: pointer;">{{ r.name }}</div>
+                      <div style="font-size: 11px; color: #8B949E; margin-top: 3px;">{{ r.meta }}</div>
+                    </td>
+                    <td style="padding: 14px; font-size: 13px; font-variant-numeric: tabular-nums;">{{ r.projects }}</td>
+                    <td style="padding: 14px;">
+                      <div style="font-size: 13px; font-variant-numeric: tabular-nums; color: {{ r.soonColor }};">{{ r.soon }}</div>
+                      <div style="font-size: 11px; color: #8B949E;">{{ r.soonNote }}</div>
+                    </td>
+                    <sc-for list="{{ r.cells }}" as="c" hint-placeholder-count="4">
+                      <td style="padding: 14px;">
+                        <span style="display: inline-flex; align-items: center; gap: 6px; font-size: 12px; color: {{ c.color }};">
+                          <span style="width: 7px; height: 7px; border-radius: 50%; background: {{ c.color }}; display: block;"></span>{{ c.text }}
+                        </span>
+                      </td>
+                    </sc-for>
+                    <td style="padding: 14px; font-size: 11.5px; color: #8B949E; font-variant-numeric: tabular-nums;">{{ r.updated }}</td>
+                  </tr>
+                </sc-for>
+              </tbody>
+            </table>
+          </div>
+
+          <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 20px;">
+            <div style="background: #FFFFFF; border: 1px solid #E2E5E9; border-radius: 6px; padding: 20px;">
+              <div style="font-size: 15px; font-weight: 700; margin-bottom: 6px;">白ラベル通知</div>
+              <p style="font-size: 12px; color: #4A535E; line-height: 1.9; margin: 0 0 14px;">顧問先への通知は、事務所名で送信されます。</p>
+              <div style="border: 1px solid #E2E5E9; background: #FAFBFC; border-radius: 4px; padding: 14px; font-size: 12.5px; line-height: 2; color: #4A535E;">送信元名　山田会計事務所<br />送信元アドレス　no-reply@yamadakaikei.co.jp</div>
+              <span style="display: inline-block; margin-top: 14px; font-size: 12.5px; border: 1px solid #C9CFD6; padding: 8px 16px; border-radius: 4px; cursor: pointer;" style-hover="border-color: #14345C;">通知設定を変更</span>
+            </div>
+            <div style="background: #FFFFFF; border: 1px solid #E2E5E9; border-radius: 6px; padding: 20px;">
+              <div style="font-size: 15px; font-weight: 700; margin-bottom: 6px;">顧問先招待リンク</div>
+              <p style="font-size: 12px; color: #4A535E; line-height: 1.9; margin: 0 0 14px;">このリンクから登録した顧問先は、事務所に紐づきます。</p>
+              <div style="border: 1px solid #E2E5E9; background: #FAFBFC; border-radius: 4px; padding: 12px 14px; font-size: 12px; color: #1F5FBF; word-break: break-all;">https://hojokare.jp/invite/yzm-8k7d-2f9q</div>
+              <div style="font-size: 11.5px; color: #8B949E; margin-top: 10px; font-variant-numeric: tabular-nums;">有効期限 2025/07/23</div>
+            </div>
+          </div>
+        </div>
+
+        <div style="display: flex; flex-direction: column; gap: 20px;">
+          <div style="background: #FFFFFF; border: 1px solid #E2E5E9; border-radius: 6px;">
+            <div style="padding: 16px 20px; border-bottom: 1px solid #E2E5E9; font-size: 15px; font-weight: 700;">緊急タスク（顧問先横断）</div>
+            <sc-for list="{{ firmTasks }}" as="t" hint-placeholder-count="4">
+              <div style="padding: 14px 20px; border-bottom: 1px solid #F2F4F6; border-left: 3px solid {{ t.color }};">
+                <div style="display: flex; align-items: center; gap: 8px; margin-bottom: 5px;">
+                  <span style="font-size: 11px; color: {{ t.color }}; font-weight: 500;">{{ t.tag }}</span>
+                  <span style="font-size: 11px; color: #8B949E;">{{ t.client }}</span>
+                </div>
+                <div style="display: flex; align-items: center; justify-content: space-between; gap: 12px;">
+                  <div>
+                    <div style="font-size: 13.5px; font-weight: 500;">{{ t.title }}</div>
+                    <div style="font-size: 11px; color: #8B949E; margin-top: 3px; font-variant-numeric: tabular-nums;">期限 {{ t.due }}</div>
+                  </div>
+                  <span onClick="{{ goProject }}" style="white-space: nowrap; border: 1px solid #C9CFD6; font-size: 12px; padding: 6px 14px; border-radius: 4px; cursor: pointer;" style-hover="border-color: #14345C;">対応する</span>
+                </div>
+              </div>
+            </sc-for>
+          </div>
+
+          <div style="background: #FFFFFF; border: 1px solid #E2E5E9; border-radius: 6px;">
+            <div style="padding: 16px 20px; border-bottom: 1px solid #E2E5E9; font-size: 15px; font-weight: 700;">最新のアップロード</div>
+            <sc-for list="{{ firmUploads }}" as="u" hint-placeholder-count="4">
+              <div style="padding: 12px 20px; border-bottom: 1px solid #F2F4F6;">
+                <div style="font-size: 11.5px; color: #8B949E; margin-bottom: 3px;">{{ u.client }}</div>
+                <div style="display: flex; justify-content: space-between; gap: 10px;">
+                  <span style="font-size: 13px;">{{ u.file }}</span>
+                  <span style="font-size: 11px; color: #8B949E; font-variant-numeric: tabular-nums; white-space: nowrap;">{{ u.at }}</span>
+                </div>
+              </div>
+            </sc-for>
+          </div>
+        </div>
+      </div>
+    </main>
+    </sc-if>
+  </div>
+</div>
+</sc-if>
+
+<sc-if value="{{ showSwitcher }}" hint-placeholder-val="{{ true }}">
+<div style="position: fixed; left: 50%; transform: translateX(-50%); bottom: 18px; z-index: 100; background: rgba(20, 24, 29, 0.94); border-radius: 6px; padding: 5px; display: flex; gap: 2px; box-shadow: 0 6px 24px rgba(0,0,0,0.24);">
+  <sc-for list="{{ switcher }}" as="s" hint-placeholder-count="8">
+    <span onClick="{{ s.onClick }}" style="font-size: 11.5px; padding: 7px 12px; border-radius: 4px; cursor: pointer; color: {{ s.fg }}; background: {{ s.bg }}; white-space: nowrap;">{{ s.label }}</span>
+  </sc-for>
+</div>
+</sc-if>
+
+</div>
+
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props="{&quot;orgName&quot;:{&quot;editor&quot;:&quot;text&quot;,&quot;default&quot;:&quot;株式会社東海精密&quot;,&quot;tsType&quot;:&quot;string&quot;,&quot;section&quot;:&quot;内容&quot;},&quot;showScreenSwitcher&quot;:{&quot;editor&quot;:&quot;boolean&quot;,&quot;default&quot;:true,&quot;tsType&quot;:&quot;boolean&quot;,&quot;section&quot;:&quot;プロトタイプ&quot;}}">
+const C = { ink: "#14181D", sub: "#4A535E", mute: "#8B949E", navy: "#14345C", blue: "#1F5FBF", red: "#B3261E", amber: "#8A5A00", green: "#1B6B48", gray: "#8B949E" };
+
+class Component extends DCLogic {
+  state = { screen: "lp" };
+  go(s) { return () => { this.setState({ screen: s }); window.scrollTo(0, 0); }; }
+
+  renderVals() {
+    const s = this.state.screen;
+    const app = ["dash", "project", "checklist", "settings", "firm"].includes(s);
+    const nav = [
+      ["dash", "ダッシュボード", ""], ["project", "案件", ""], ["checklist", "チェックリスト", ""],
+      ["docs", "証憑ボックス", ""], ["notify", "通知", "3"], ["settings", "設定", ""], ["firm", "士業パートナー", ""]
+    ].map(([k, label, badge]) => {
+      const active = k === s || (s === "project" && k === "project");
+      return { label, badge: badge || "", badgeOpacity: badge ? 1 : 0,
+        bg: active ? "#1F4A80" : "transparent", fg: active ? "#FFFFFF" : "#C4D0E2",
+        weight: active ? 700 : 400, onClick: this.go(["dash","project","checklist","settings","firm"].includes(k) ? k : s) };
+    });
+
+    const st = (status) => ({
+      "完了": C.green, "提出済み": C.green, "期限間近": "#C9A227", "期限超過": C.red, "未到来": C.gray, "対応中": "#C9A227", "未対応": C.gray
+    }[status] || C.gray);
+
+    const cell = (status, date, left) => ({ status, date, left, color: st(status) });
+
+    return {
+      screen: s, isApp: app, isMarketing: !app,
+      isLp: s === "lp", isChecker: s === "checker", isResult: s === "result",
+      isDash: s === "dash", isProject: s === "project", isChecklist: s === "checklist",
+      isSettings: s === "settings", isFirm: s === "firm",
+      goLp: this.go("lp"), goChecker: this.go("checker"), goResult: this.go("result"),
+      goDash: this.go("dash"), goProject: this.go("project"), goChecklist: this.go("checklist"),
+      orgLabel: s === "firm" ? "山田会計事務所" : (this.props.orgName ?? "株式会社東海精密"),
+      roleLabel: s === "firm" ? "士業パートナー" : "管理者",
+      showSwitcher: this.props.showScreenSwitcher ?? true,
+      navItems: nav,
+
+      switcher: [["lp","LP"],["checker","チェッカー入力"],["result","計算結果"],["dash","ダッシュボード"],["project","案件詳細"],["checklist","チェックリスト"],["settings","設定"],["firm","士業"]].map(([k,label]) => ({
+        label, onClick: this.go(k), fg: k === s ? "#14181D" : "#C9CFD6", bg: k === s ? "#FFFFFF" : "transparent" })),
+
+      steps: [
+        { no: "STEP 1", title: "交付決定日を入れる", body: "補助金種別・公募回・交付決定日・決算月。入力は6項目、3分で終わります。" },
+        { no: "STEP 2", title: "5年分の期限が出る", body: "実績報告、事業化状況報告5回分、財産処分制限期間まで、根拠つきで一覧になります。" },
+        { no: "STEP 3", title: "期限前に届く", body: "90/60/30/14/7日前と前日に、LINEとメールで「やること」と必要書類が届きます。" }
+      ],
+      features: [
+        { tag: "期限", title: "制度ごとの期限を自動で組み立てる", body: "公募回ごとのルールをマスタとして持ち、決算月の変更にも追随します。事務局の個別指示は手動で上書きでき、変更は履歴に残ります。" },
+        { tag: "証憑", title: "LINEで送るだけで、案件フォルダに入る", body: "見積・発注・納品・検収・請求・振込・賃金台帳などに自動で仕分け。誤りは手で直せて、原本は無加工のまま保管します。" },
+        { tag: "報告準備", title: "何が足りないかだけを催促する", body: "報告回ごとの必要書類に対して、揃った／未収集を表示。不足分だけをまとめて担当者へ催促できます。" },
+        { tag: "5年保存", title: "翌年の報告は、前年の更新で終わる", body: "報告履歴と証憑が案件ごとに5年分たまるため、2年目以降は差分の入力が中心になります。" }
+      ],
+      plans: [
+        { name: "チェッカー", for: "まず期限を知りたい方", price: "無料", unit: "", cta: "いますぐ使う", items: ["5年分の期限の自動算出", "PDF出力・メール送付", "30日前の無料アラート（1案件）"] },
+        { name: "スタンダード", for: "採択企業の担当者向け", price: "9,800", unit: "円 / 月・案件", cta: "申し込む", items: ["段階リマインド（LINE・メール）", "証憑ボックスと自動仕分け", "報告準備チェックリスト", "報告履歴を5年保存"] },
+        { name: "複数案件", for: "2案件目以降の追加分", price: "4,900", unit: "円 / 月・案件", cta: "申し込む", items: ["同一企業の追加採択案件", "スタンダードの全機能", "案件横断のダッシュボード"] },
+        { name: "士業パートナー", for: "税理士・診断士・行政書士", price: "29,800", unit: "円 / 月", cta: "詳しく見る", items: ["顧問先20案件まで（超過 +1,200円）", "顧問先横断ダッシュボード", "事務所名で送る白ラベル通知", "一括CSV出力"] }
+      ],
+      footerCols: [
+        { head: "サービス", links: ["機能", "料金", "士業パートナー", "報告期限チェッカー"] },
+        { head: "サポート", links: ["よくあるご質問", "お問い合わせ", "対応している補助金"] },
+        { head: "法的情報", links: ["利用規約", "プライバシーポリシー", "特定商取引法に基づく表記"] }
+      ],
+
+      checkerSteps: [
+        { no: "1", label: "入力", bg: C.navy, fg: "#FFFFFF", text: C.ink },
+        { no: "2", label: "確認", bg: "#E4E8ED", fg: "#78828E", text: "#78828E" },
+        { no: "3", label: "結果", bg: "#E4E8ED", fg: "#78828E", text: "#78828E" }
+      ],
+      checkerFields: [
+        { label: "補助金種別", isSelect: true, isInput: false, value: "事業再構築補助金", hint: "事業再構築補助金・ものづくり補助金に対応しています" },
+        { label: "公募回", isSelect: true, isInput: false, value: "第11回", hint: "交付決定通知書に記載の公募回を選択してください" },
+        { label: "交付決定日", isSelect: false, isInput: true, value: "YYYY/MM/DD", hint: "交付決定通知書に記載の日付です" },
+        { label: "補助事業終了日（予定）", isSelect: false, isInput: true, value: "YYYY/MM/DD", hint: "実績報告の起算となる完了予定日です" },
+        { label: "決算月", isSelect: true, isInput: false, value: "3月", hint: "事業化状況報告の期限は決算日の3ヶ月後です" },
+        { label: "メールアドレス", isSelect: false, isInput: true, value: "taro@example.co.jp", hint: "計算結果と30日前アラートをお送りします" }
+      ],
+      checkerOutputs: [
+        { title: "実績報告の期限", body: "交付決定日から12ヶ月以内（グリーン枠は14ヶ月）で算出します。" },
+        { title: "事業化状況報告（5年分）", body: "決算日の3ヶ月後を基準に、1年目から5年目まで一覧にします。" },
+        { title: "財産処分制限期間", body: "取得財産の処分に制限がかかる期間を表示します。" },
+        { title: "30日前アラート", body: "各期限の30日前に、登録メールへ1通お送りします（1案件のみ）。" }
+      ],
+
+      resultConditions: [
+        { label: "補助金", value: "事業再構築補助金" }, { label: "公募回", value: "第11回" },
+        { label: "交付決定日", value: "2024/06/20" }, { label: "補助事業終了予定日", value: "2025/03/31" },
+        { label: "決算月", value: "3月" }
+      ],
+      resultGroups: [
+        { title: "実績報告", note: "事業完了後、または補助事業終了予定日のいずれか早い日から30日以内", rows: [
+          { label: "実績報告", date: "2025/04/30（水）", left: "あと 311 日", status: "未到来", fg: C.sub, bg: "#F7F8F9", bd: "#E2E5E9" }
+        ]},
+        { title: "事業化状況報告", note: "1年目〜5年目・毎年 決算日の3ヶ月後まで", rows: [
+          { label: "1年目", date: "2026/04/30（木）", left: "あと 676 日", status: "未到来", fg: C.sub, bg: "#F7F8F9", bd: "#E2E5E9" },
+          { label: "2年目", date: "2027/04/30（金）", left: "あと 1,041 日", status: "未到来", fg: C.sub, bg: "#F7F8F9", bd: "#E2E5E9" },
+          { label: "3年目", date: "2028/04/28（金）", left: "あと 1,406 日", status: "未到来", fg: C.sub, bg: "#F7F8F9", bd: "#E2E5E9" },
+          { label: "4年目", date: "2029/04/30（月）", left: "あと 1,771 日", status: "未到来", fg: C.sub, bg: "#F7F8F9", bd: "#E2E5E9" },
+          { label: "5年目", date: "2030/04/30（火）", left: "あと 2,136 日", status: "未到来", fg: C.sub, bg: "#F7F8F9", bd: "#E2E5E9" }
+        ]},
+        { title: "財産処分制限期間", note: "取得財産等の処分が制限される期間", rows: [
+          { label: "制限期間", date: "2025/03/31 〜 2030/03/30", left: "あと 1,984 日", status: "制限期間中", fg: C.amber, bg: "#FCF8EE", bd: "#E8D9B4" }
+        ]}
+      ],
+      sources: [
+        { title: "事業再構築補助金 公募要領", ref: "第11回公募 / v6.0 p.45" },
+        { title: "事務処理マニュアル（実績報告編）", ref: "v4.0 / p.18" },
+        { title: "事務処理マニュアル（事業化状況報告編）", ref: "v4.0 / p.33" }
+      ],
+      paidPoints: [
+        { title: "90/60/30/14/7/前日の段階通知", body: "LINEとメールに、やることと必要書類を添えて届きます。" },
+        { title: "LINEで証憑を回収", body: "現場から送ってもらった書類が案件フォルダに自動で入ります。" },
+        { title: "報告準備チェックリスト", body: "不足分だけをまとめて催促できます。" },
+        { title: "5年保存", body: "報告書・証憑・通知履歴をまとめて保管・検索。" }
+      ],
+
+      kpis: [
+        { label: "管理案件", value: "12", note: "すべての進行中案件", color: C.ink },
+        { label: "30日以内の期限", value: "5", note: "対応が必要です", color: "#C9A227" },
+        { label: "未収集の書類", value: "23", note: "証憑の回収が必要です", color: C.red },
+        { label: "要対応の案件", value: "3", note: "対応が遅れています", color: C.red }
+      ],
+      legend: [{ label: "完了", color: C.green }, { label: "期限間近", color: "#C9A227" }, { label: "期限超過", color: C.red }, { label: "未到来", color: C.gray }],
+      matrixCols: ["実績報告", "事業化1年目", "事業化2年目", "事業化3年目", "事業化4年目", "事業化5年目"],
+      matrixRows: [
+        { name: "株式会社東海精密", grant: "事業再構築補助金 第11回", adopted: "採択 2023/06/15", cells: [
+          cell("期限間近", "2025/06/30", "あと7日"), cell("完了", "2024/06/30", "提出済み"), cell("完了", "2025/06/30", "提出済み"),
+          cell("未到来", "2026/06/30", "あと372日"), cell("未到来", "2027/06/30", "あと732日"), cell("未到来", "2028/06/30", "あと1,102日")
+        ]},
+        { name: "名古屋フーズ株式会社", grant: "ものづくり補助金 第18次", adopted: "採択 2024/02/20", cells: [
+          cell("完了", "2025/02/28", "提出済み"), cell("期限間近", "2025/11/30", "あと160日"), cell("未到来", "2026/11/30", "あと525日"),
+          cell("未到来", "2027/11/30", "あと890日"), cell("未到来", "2028/11/30", "あと1,255日"), cell("未到来", "2029/11/30", "あと1,620日")
+        ]},
+        { name: "三河電機株式会社", grant: "事業再構築 グリーン枠", adopted: "採択 2024/07/10", cells: [
+          cell("期限超過", "2025/04/30", "35日超過"), cell("期限間近", "2025/07/31", "あと38日"), cell("未到来", "2026/07/31", "あと403日"),
+          cell("未到来", "2027/07/31", "あと768日"), cell("未到来", "2028/07/31", "あと1,133日"), cell("未到来", "2029/07/31", "あと1,498日")
+        ]}
+      ],
+      checkStats: [
+        { label: "完了", value: "28", note: "全体の62%", color: C.green },
+        { label: "対応中", value: "14", note: "全体の31%", color: "#C9A227" },
+        { label: "遅延", value: "3", note: "全体の7%", color: C.red }
+      ],
+      recentLists: [
+        { name: "実績報告チェックリスト（共通）", date: "2025/06/20" },
+        { name: "事業化状況報告（1年目）", date: "2025/06/18" },
+        { name: "賃金台帳確認チェックリスト", date: "2025/06/15" }
+      ],
+      upcoming: [
+        { days: "7", title: "実績報告の提出", sub: "株式会社東海精密 / 事業再構築 第11回", due: "2025/06/30", color: C.red },
+        { days: "14", title: "賃金台帳の提出", sub: "三河電機株式会社 / 事業再構築 グリーン枠", due: "2025/07/07", color: "#C9A227" },
+        { days: "38", title: "事業化状況報告（1年目）", sub: "三河電機株式会社 / 事業再構築 グリーン枠", due: "2025/07/31", color: "#C9A227" },
+        { days: "160", title: "事業化状況報告（1年目）", sub: "名古屋フーズ株式会社 / ものづくり補助金", due: "2025/11/30", color: C.gray },
+        { days: "221", title: "事業化状況報告（2年目）", sub: "株式会社東海精密 / 事業再構築 第11回", due: "2025/12/31", color: C.gray }
+      ],
+      missingDocs: [
+        { name: "見積書", count: "8", warn: "うち期限超過 2", warnColor: C.red },
+        { name: "請求書", count: "7", warn: "うち期限超過 1", warnColor: C.red },
+        { name: "振込記録", count: "5", warn: "うち期限超過 2", warnColor: C.red },
+        { name: "賃金台帳", count: "3", warn: "うち期限間近 1", warnColor: C.amber }
+      ],
+
+      projectMeta: [
+        { label: "交付決定日", value: "2023/06/15" }, { label: "補助事業終了予定日", value: "2025/05/31" },
+        { label: "決算月", value: "3月" }, { label: "補助金額", value: "75,000,000 円" },
+        { label: "事務局", value: "事業再構築補助金事務局" }, { label: "ステータス", value: "補助事業実施中" }
+      ],
+      projectTabs: ["期限", "証憑", "チェックリスト", "履歴"].map((label) => ({
+        label, fg: label === "期限" ? C.ink : C.sub, weight: label === "期限" ? 700 : 400,
+        bd: label === "期限" ? C.navy : "transparent",
+        onClick: label === "チェックリスト" ? this.go("checklist") : this.go("project") })),
+      deadlineRows: [
+        { label: "実績報告", date: "2025/06/30", left: "あと7日", status: "期限間近", color: "#C9A227", remind: "90/60/30/14/7/前日", owner: "山田 太郎", source: "交付規程 第18条", rowBg: "#FFFFFF" },
+        { label: "事業化状況報告（1年目）", date: "2025/07/31", left: "あと38日", status: "期限間近", color: "#C9A227", remind: "90/60/30/14/7/前日", owner: "鈴木 花子", source: "交付規程 第19条", rowBg: "#FFFFFF" },
+        { label: "事業化状況報告（2年目）", date: "2026/07/31", left: "あと403日", status: "未到来", color: C.gray, remind: "90/60/30/14/7/前日", owner: "鈴木 花子", source: "交付規程 第19条", rowBg: "#FFFFFF" },
+        { label: "事業化状況報告（3年目）", date: "2027/07/31", left: "あと768日", status: "未到来", color: C.gray, remind: "90/60/30/14/7/前日", owner: "鈴木 花子", source: "交付規程 第19条", rowBg: "#FFFFFF" },
+        { label: "事業化状況報告（4年目）", date: "2028/07/31", left: "あと1,133日", status: "未到来", color: C.gray, remind: "90/60/30/14/7/前日", owner: "鈴木 花子", source: "交付規程 第19条", rowBg: "#FFFFFF" },
+        { label: "事業化状況報告（5年目）", date: "2029/07/31", left: "あと1,498日", status: "未到来", color: C.gray, remind: "90/60/30/14/7/前日", owner: "鈴木 花子", source: "交付規程 第19条", rowBg: "#FFFFFF" },
+        { label: "財産処分制限期間", date: "2030/05/31", left: "あと1,798日", status: "未到来", color: C.gray, remind: "180/90/30/14/前日", owner: "山田 太郎", source: "交付規程 第22条", rowBg: "#FFFFFF" },
+        { label: "賃上げ要件の達成状況確認", date: "2025/06/15", left: "35日超過", status: "期限超過", color: C.red, remind: "—", owner: "山田 太郎", source: "交付規程 第15条", rowBg: "#FCF4F3" }
+      ],
+      nextTasks: [
+        { tag: "期限間近", title: "実績報告の提出", due: "2025/06/30（あと7日）", color: "#C9A227" },
+        { tag: "期限間近", title: "見積書の回収", due: "2025/06/23（本日）", color: "#C9A227" },
+        { tag: "未対応", title: "賃金台帳の確認", due: "2025/07/07（あと14日）", color: C.gray }
+      ],
+      reminderRows: [
+        { timing: "90日前", date: "2025/04/01", state: "通知済み", color: C.green },
+        { timing: "60日前", date: "2025/05/01", state: "通知済み", color: C.green },
+        { timing: "30日前", date: "2025/05/31", state: "通知済み", color: C.green },
+        { timing: "14日前", date: "2025/06/16", state: "通知済み", color: C.green },
+        { timing: "7日前", date: "2025/06/23", state: "本日送信", color: "#C9A227" },
+        { timing: "前日", date: "2025/06/29", state: "未通知", color: C.gray }
+      ],
+
+      checklistTabs: ["期限", "証憑", "チェックリスト", "履歴"].map((label) => ({
+        label, fg: label === "チェックリスト" ? C.ink : C.sub, weight: label === "チェックリスト" ? 700 : 400,
+        bd: label === "チェックリスト" ? C.navy : "transparent",
+        onClick: label === "チェックリスト" ? this.go("checklist") : this.go("project") })),
+      checklistSummary: [
+        { label: "揃った", value: "28", color: C.green }, { label: "確認中", value: "9", color: "#C9A227" }, { label: "未収集", value: "8", color: C.red }
+      ],
+      cycleTabs: ["実績報告", "事業化1年目", "事業化2年目", "事業化3年目", "事業化4年目", "事業化5年目"].map((label) => ({
+        label, bd: label === "実績報告" ? C.navy : "#D7DCE2", bg: label === "実績報告" ? C.navy : "#FFFFFF", fg: label === "実績報告" ? "#FFFFFF" : C.sub })),
+      checklistRows: [
+        { name: "見積書（相見積を含む）", state: "揃った", color: C.green, file: "見積書_一式.pdf", fileColor: C.blue, owner: "鈴木 花子", last: "2025/06/18 10:30" },
+        { name: "発注書", state: "揃った", color: C.green, file: "発注書_20250610.pdf", fileColor: C.blue, owner: "鈴木 花子", last: "2025/06/16 15:42" },
+        { name: "納品書", state: "確認中", color: "#C9A227", file: "納品書_一部.pdf", fileColor: C.blue, owner: "田中 一郎", last: "2025/06/20 09:15" },
+        { name: "検収書", state: "未収集", color: C.red, file: "未添付", fileColor: C.mute, owner: "田中 一郎", last: "2025/06/20 09:15" },
+        { name: "請求書", state: "揃った", color: C.green, file: "請求書_20250615.pdf", fileColor: C.blue, owner: "鈴木 花子", last: "2025/06/15 11:05" },
+        { name: "振込記録", state: "確認中", color: "#C9A227", file: "振込記録_一部.pdf", fileColor: C.blue, owner: "田中 一郎", last: "2025/06/19 16:20" },
+        { name: "賃金台帳", state: "未収集", color: C.red, file: "未添付", fileColor: C.mute, owner: "鈴木 花子", last: "2025/06/20 09:15" },
+        { name: "売上資料", state: "揃った", color: C.green, file: "売上資料_202506.pdf", fileColor: C.blue, owner: "田中 一郎", last: "2025/06/17 13:50" }
+      ],
+      recentDocs: [
+        { name: "振込記録_一部.pdf", by: "田中 一郎 / 2025/06/22" },
+        { name: "納品書_一部.pdf", by: "鈴木 花子 / 2025/06/21" },
+        { name: "請求書_20250615.pdf", by: "鈴木 花子 / 2025/06/20" },
+        { name: "売上資料_202506.pdf", by: "田中 一郎 / 2025/06/17" }
+      ],
+      memos: ["納品書・検収書は6月中に揃えること", "振込はすべて対象口座から実施済み", "賃金台帳は直近月まで更新済み"],
+
+      settingsNav: ["組織", "メンバー", "LINE接続", "通知設定", "請求"].map((label) => ({
+        label, bg: label === "組織" ? "#F1F4F8" : "#FFFFFF", fg: label === "組織" ? C.navy : C.sub, weight: label === "組織" ? 700 : 400 })),
+      orgInfo: [
+        { label: "組織名", value: "株式会社東海精密" }, { label: "組織種別", value: "法人" },
+        { label: "主担当メールアドレス", value: "info@tokai-seimitsu.co.jp" },
+        { label: "プラン", value: "スタンダード（年払い）" }, { label: "登録日", value: "2023/06/15" }
+      ],
+      members: [
+        { name: "山田 太郎", mail: "yamada@tokai-seimitsu.co.jp", role: "管理者", state: "有効", color: C.green },
+        { name: "鈴木 花子", mail: "suzuki@tokai-seimitsu.co.jp", role: "管理者", state: "有効", color: C.green },
+        { name: "田中 健一", mail: "tanaka@tokai-seimitsu.co.jp", role: "担当者", state: "有効", color: C.green },
+        { name: "小林 美咲", mail: "kobayashi@tokai-seimitsu.co.jp", role: "担当者", state: "有効", color: C.green },
+        { name: "松本 誠", mail: "matsumoto@tokai-seimitsu.co.jp", role: "担当者", state: "招待中", color: C.amber }
+      ],
+      notifyCols: ["90日前", "60日前", "30日前", "14日前", "7日前", "前日"],
+      notifyRows: [
+        { channel: "LINE", dest: "山田 太郎（接続済み）", cells: Array(6).fill({ bd: C.navy, bg: C.navy }) },
+        { channel: "メール", dest: "info@tokai-seimitsu.co.jp", cells: Array(6).fill(0).map((_, i) => i === 4 ? { bd: "#C9CFD6", bg: "#FFFFFF" } : { bd: C.navy, bg: C.navy }) }
+      ],
+      dataNotes: [
+        "証憑データは5年間保管されます。削除は既定で行えません（論理削除と操作ログを保持）。",
+        "共有には有効期限15分の署名付きURLを発行します。",
+        "保管はプライベートバケット、通信はすべてTLSで暗号化しています。"
+      ],
+
+      firmKpis: [
+        { label: "顧問先数", value: "12", unit: "社", note: "すべての顧問先", color: C.ink },
+        { label: "管理案件数", value: "48", unit: "件", note: "すべての進行中案件", color: C.ink },
+        { label: "30日以内の期限", value: "11", unit: "件", note: "対応が必要な案件", color: "#C9A227" },
+        { label: "未対応アラート", value: "6", unit: "件", note: "要対応のアラート", color: C.red }
+      ],
+      firmFilters: ["すべての種別", "すべての担当者", "すべてのステータス", "すべての都道府県"],
+      firmCols: ["顧問先", "進行中", "30日以内", "証憑収集", "実績報告", "事業化状況報告", "精算・支払", "最終更新"],
+      firmRows: [
+        { name: "株式会社東海精密", meta: "山田 太郎 / 愛知県春日井市", projects: "12 件", soon: "2 件", soonNote: "あと18日", soonColor: "#C9A227", updated: "2025/06/20", cells: [
+          { text: "3 件", color: C.sub }, { text: "完了", color: C.green }, { text: "期限間近", color: "#C9A227" }, { text: "—", color: C.mute }] },
+        { name: "名古屋フーズ株式会社", meta: "佐藤 一郎 / 愛知県名古屋市", projects: "10 件", soon: "3 件", soonNote: "あと7日", soonColor: C.red, updated: "2025/06/19", cells: [
+          { text: "4 件 超過", color: C.red }, { text: "期限間近", color: "#C9A227" }, { text: "未到来", color: C.gray }, { text: "—", color: C.mute }] },
+        { name: "三河電機株式会社", meta: "鈴木 花子 / 愛知県刈谷市", projects: "9 件", soon: "1 件", soonNote: "あと26日", soonColor: "#C9A227", updated: "2025/06/18", cells: [
+          { text: "2 件", color: C.sub }, { text: "期限間近", color: "#C9A227" }, { text: "期限間近", color: "#C9A227" }, { text: "1 件", color: C.sub }] },
+        { name: "岡崎製作所株式会社", meta: "山田 太郎 / 愛知県岡崎市", projects: "7 件", soon: "5 件", soonNote: "うち超過 1", soonColor: C.red, updated: "2025/06/17", cells: [
+          { text: "2 件 超過", color: C.red }, { text: "未到来", color: C.gray }, { text: "期限間近", color: "#C9A227" }, { text: "1 件", color: C.sub }] }
+      ],
+      firmTasks: [
+        { tag: "7日超過", client: "株式会社東海精密", title: "実績報告の提出", due: "2025/06/30", color: C.red },
+        { tag: "3日超過", client: "名古屋フーズ株式会社", title: "証憑の回収", due: "2025/06/15", color: C.red },
+        { tag: "あと5日", client: "三河電機株式会社", title: "事業化状況報告（1年目）", due: "2025/06/30", color: "#C9A227" },
+        { tag: "あと10日", client: "岡崎製作所株式会社", title: "実績報告の提出", due: "2025/07/01", color: "#C9A227" }
+      ],
+      firmUploads: [
+        { client: "株式会社東海精密", file: "領収書_20250619.pdf", at: "06/19 16:42" },
+        { client: "名古屋フーズ株式会社", file: "実績報告書（第1回）.xlsx", at: "06/19 14:21" },
+        { client: "三河電機株式会社", file: "事業化状況報告（1年目）.pdf", at: "06/18 11:08" },
+        { client: "岡崎製作所株式会社", file: "機械設備_請求書.pdf", at: "06/17 10:33" }
+      ]
+    };
+  }
+}
+
+</script>
+</body>
+</html>

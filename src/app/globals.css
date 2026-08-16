@@ -1,0 +1,48 @@
+@import "tailwindcss";
+
+/* ホジョカレ デザイントークン(design/ホジョカレ.dc.html 準拠) */
+@theme {
+  --color-ink: #14181d;
+  --color-sub: #4a535e;
+  --color-soft: #78828e;
+  --color-mute: #8b949e;
+  --color-faint-text: #a6aeb8;
+  --color-navy: #14345c;
+  --color-navy-hover: #1f5fbf;
+  --color-blue: #1f5fbf;
+  --color-blue-deep: #14345c;
+  --color-danger: #b3261e;
+  --color-danger-line: #ebc5c2;
+  --color-danger-bg: #fcf4f3;
+  --color-amber: #c9a227;
+  --color-amber-deep: #8a5a00;
+  --color-amber-line: #e8d9b4;
+  --color-amber-bg: #fcf8ee;
+  --color-green: #1b6b48;
+  --color-green-line: #bfddcc;
+  --color-green-bg: #f1f8f4;
+  --color-paper: #f4f5f7;
+  --color-line: #e2e5e9;
+  --color-line-soft: #eff1f3;
+  --color-line-faint: #f2f4f6;
+  --color-border-input: #c9cfd6;
+  --color-border-mid: #d7dce2;
+  --color-surface: #fafbfc;
+  --font-sans: var(--font-noto-sans-jp), "Hiragino Kaku Gothic ProN", "Yu Gothic", sans-serif;
+}
+
+body {
+  background: var(--color-paper);
+  color: var(--color-ink);
+  font-family: var(--font-sans);
+  -webkit-font-smoothing: antialiased;
+}
+
+::placeholder {
+  color: var(--color-faint-text);
+}
+
+/* 数値は等幅(デザイン指定) */
+.tnum {
+  font-variant-numeric: tabular-nums;
+}
