@@ -24,6 +24,17 @@ npm run lint       # ESLint
 npm run build      # 本番ビルド
 ```
 
+### 環境変数(リード保存・メール送信を有効にする場合)
+
+```bash
+cp .env.example .env.local   # 値を埋める
+```
+
+- Supabase: プロジェクトを作成し、`supabase/migrations/0001_leads.sql` を SQL Editor で実行。
+  Settings > API の URL と service_role キーを `.env.local` に設定
+- Resend: `RESEND_API_KEY` を設定(未設定の間はメール送信をスキップして動作する)
+- 30日前アラート: `/api/cron/alerts` を毎日実行(Vercel Cron 設定は `vercel.json`)
+
 ## 構成
 
 - `src/lib/subsidy/` — ドメインの核。制度マスタ(`master.ts`)と期限計算エンジン(`deadline.ts`)。

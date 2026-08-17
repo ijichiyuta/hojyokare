@@ -1,5 +1,7 @@
 import Link from "next/link";
 
+import { emailEnabled, sendResultEmail } from "@/lib/email";
+import { saveLead } from "@/lib/leads";
 import { chipClass, dueStatus, periodStatus, todayJST } from "@/lib/status";
 import { calcDeadlines, type DeadlineItem, type DeadlineResult } from "@/lib/subsidy/deadline";
 import type { SourceRef } from "@/lib/subsidy/types";
@@ -104,6 +106,18 @@ export default async function ResultPage({
     });
   } catch (e) {
     return <ErrorCard message={e instanceof Error ? e.message : "入力内容を確認してください"} />;
+  }
+
+  // リード保存+結果メール送付。新規保存時のみ送信し、リロードでの再送は防ぐ。
+  // DB・メール未設定でも結果表示は止めない。
+  let mailSent = false;
+  if (email) {
+    const lead = await saveLead(email, result.input);
+    if (lead?.isNew) {
+      mailSent = await sendResultEmail(email, result);
+    } else if (lead && !lead.isNew && emailEnabled()) {
+      mailSent = true; // 既存リード = 初回表示時に送付済み
+    }
   }
 
   const today = todayJST();
@@ -251,12 +265,18 @@ export default async function ResultPage({
             >
               PDFで保存(準備中)
             </span>
-            <span
-              className="cursor-default rounded border border-border-input bg-white px-[22px] py-[13px] text-sm text-mute"
-              title="準備中"
-            >
-              メールで送付(準備中)
-            </span>
+            {mailSent ? (
+              <span className="cursor-default rounded border border-border-input bg-white px-[22px] py-[13px] text-sm text-sub">
+                メールで送付済み
+              </span>
+            ) : (
+              <span
+                className="cursor-default rounded border border-border-input bg-white px-[22px] py-[13px] text-sm text-mute"
+                title="準備中"
+              >
+                メールで送付(準備中)
+              </span>
+            )}
             <Link
               href="/#pricing"
               className="ml-auto rounded bg-navy px-[26px] py-[13px] text-sm font-medium text-white hover:bg-navy-hover"
@@ -267,7 +287,7 @@ export default async function ResultPage({
           {email ? (
             <p className="mt-3 text-xs text-soft">
               30日前アラートの送付先: <span className="tnum">{email}</span>
-              (送信機能は準備中です)
+              {mailSent ? "" : "(メール送信は準備中です)"}
             </p>
           ) : null}
         </div>
