@@ -18,9 +18,9 @@ export function MarketingHeader() {
           <Link href="/#pricing" className="text-sm text-sub hover:text-navy">
             士業パートナー
           </Link>
-          <span className="cursor-default text-sm text-mute" title="準備中">
+          <Link href="/#faq" className="text-sm text-sub hover:text-navy">
             よくある質問
-          </span>
+          </Link>
           <span className="cursor-default pl-2 text-sm font-medium text-mute" title="準備中">
             ログイン
           </span>

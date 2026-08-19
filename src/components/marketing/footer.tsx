@@ -16,9 +16,9 @@ const FOOTER_COLS: {
   {
     head: "サポート",
     links: [
-      { label: "よくあるご質問" },
+      { label: "よくあるご質問", href: "/#faq" },
       { label: "お問い合わせ" },
-      { label: "対応している補助金", href: "/checker" },
+      { label: "対応している補助金", href: "/#faq" },
     ],
   },
   {

@@ -23,7 +23,34 @@ const STEPS = [
   {
     no: "STEP 3",
     title: "期限前に届く",
-    body: "90/60/30/14/7日前と前日に、LINEとメールで「やること」と必要書類が届きます。",
+    body: "各期限の30日前に、無料アラートをメールで1通お届けします。有料版は90日前〜前日の段階通知と、不足書類の催促まで。",
+  },
+];
+
+const FAQS = [
+  {
+    q: "期限を知るだけなら、カレンダーに入れれば十分では?",
+    a: "その通りです。無料チェッカーの結果をそのままカレンダーに入れてください(PDFとメールでお渡しします)。有料版が引き受けるのは、その期限までに見積書・請求書・賃金台帳など数十点の証憑を社内から集め切る実務のほうです。",
+  },
+  {
+    q: "どの補助金に対応していますか?",
+    a: "事業再構築補助金(第6回〜第13回)と、ものづくり補助金(第13次〜第23次)に対応しています。対応制度は順次拡大していきます。",
+  },
+  {
+    q: "計算される期限は正確ですか?",
+    a: "公表されている公募要領・事務処理マニュアルに基づいて計算し、各期限に根拠となる資料名を表示します。ただしあくまで目安であり、交付決定通知書や事務局からの個別通知が優先されます。有料版では事務局通知に合わせた手動上書きができ、変更は履歴に残ります。",
+  },
+  {
+    q: "報告書の作成代行はしてもらえますか?",
+    a: "いいえ。ホジョカレは期限管理・書類整理のためのツールで、作成代行・申請代行は行いません。報告義務の履行責任および最終確認はご利用者にあります。",
+  },
+  {
+    q: "無料アラートはいつ届きますか?",
+    a: "各期限の30日前に、登録いただいたメールアドレスへ1通お届けします(1案件のみ)。有料版は90/60/30/14/7日前と前日に、LINEとメールで段階的に届きます。",
+  },
+  {
+    q: "解約はいつでもできますか?",
+    a: "はい、いつでも解約できます。解約は次回更新日をもって効力を生じ、日割返金はありません。",
   },
 ];
 
@@ -286,6 +313,27 @@ export default function LandingPage() {
         </div>
       </section>
 
+      {/* FAQ */}
+      <section id="faq" className="border-b border-line bg-surface">
+        <div className="mx-auto max-w-[1200px] px-10 py-16">
+          <h2 className="mb-2 text-[13px] font-medium tracking-[0.14em] text-soft">
+            よくある質問
+          </h2>
+          <p className="mb-9 text-2xl font-bold">契約前に、よく聞かれること。</p>
+          <div className="grid grid-cols-2 gap-px border border-line bg-line">
+            {FAQS.map((f) => (
+              <div key={f.q} className="bg-white px-7 py-[26px]">
+                <div className="mb-2.5 flex gap-2.5 text-[15px] font-bold">
+                  <span className="text-blue">Q.</span>
+                  <span>{f.q}</span>
+                </div>
+                <p className="pl-[26px] text-sm leading-[1.9] text-sub">{f.a}</p>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+
       {/* CTA */}
       <section className="bg-navy">
         <div className="mx-auto flex max-w-[1200px] items-center justify-between gap-10 px-10 py-14">
@@ -294,7 +342,7 @@ export default function LandingPage() {
               まずは1案件、無料で報告期限を出す。
             </div>
             <div className="text-sm text-[#C4D0E2]">
-              交付決定日と決算月だけで計算できます。登録は結果を保存するときだけ。
+              登録不要、入力は6項目だけ。結果はPDFとメールでお渡しします。
             </div>
           </div>
           <Link
