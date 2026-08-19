@@ -4,7 +4,7 @@ import { MarketingFooter } from "@/components/marketing/footer";
 import { subsidyGroups } from "@/lib/subsidy/options";
 
 const STATS = [
-  { value: "最長6年・7回", body: "実績報告+事業化状況報告(計6回)の提出回数" },
+  { value: "最長6年・7回", body: "実績報告1回と事業化状況報告6回の合計" },
   { value: "返還", body: "報告を怠った場合に生じうる措置" },
   { value: "Excelと記憶", body: "多くの採択企業の現在の管理方法" },
 ];

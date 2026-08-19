@@ -165,11 +165,11 @@ export default async function ResultPage({
               </div>
             </div>
 
-            <div className="grid grid-cols-5 border-b border-line">
+            <div className="grid grid-cols-[1.1fr_1.5fr_1fr_1.1fr_0.6fr] border-b border-line">
               {conditions.map((c) => (
                 <div key={c.label} className="border-r border-line-soft px-5 py-4 last:border-r-0">
                   <div className="mb-1.5 text-[11px] text-soft">{c.label}</div>
-                  <div className="tnum text-sm font-medium">{c.value}</div>
+                  <div className="tnum text-balance text-sm font-medium">{c.value}</div>
                 </div>
               ))}
             </div>

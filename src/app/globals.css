@@ -36,6 +36,13 @@ body {
   color: var(--color-ink);
   font-family: var(--font-sans);
   -webkit-font-smoothing: antialiased;
+  /* 日本語の改行品質(いずれも継承される):
+     - auto-phrase: 文節単位で改行(Chrome/Edge 119+。非対応ブラウザは従来挙動)
+     - text-wrap: pretty: 行末の1〜2文字だけの孤立を防ぐ
+     - line-break: strict: 行頭の句読点等を厳格に禁則処理 */
+  word-break: auto-phrase;
+  line-break: strict;
+  text-wrap: pretty;
 }
 
 ::placeholder {
