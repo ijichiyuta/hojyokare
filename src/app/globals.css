@@ -46,3 +46,19 @@ body {
 .tnum {
   font-variant-numeric: tabular-nums;
 }
+
+/* 「PDFで保存」= ブラウザ印刷。計算結果だけを1カラムで出力する */
+@media print {
+  body {
+    background: #fff;
+  }
+  .print-hide {
+    display: none !important;
+  }
+  .print-full {
+    grid-template-columns: 1fr !important;
+  }
+  .print-minw-reset {
+    min-width: 0 !important;
+  }
+}

@@ -3,7 +3,7 @@ import Link from "next/link";
 export function MarketingHeader() {
   return (
     <div className="bg-white">
-      <header className="sticky top-0 z-20 flex h-[68px] items-center justify-between border-b border-line bg-white px-10">
+      <header className="print-hide sticky top-0 z-20 flex h-[68px] items-center justify-between border-b border-line bg-white px-10">
         <Link href="/" className="flex items-baseline gap-3">
           <span className="text-[21px] font-bold tracking-[0.04em] text-navy">ホジョカレ</span>
           <span className="text-xs tracking-[0.02em] text-soft">補助金採択後の期限・報告管理</span>

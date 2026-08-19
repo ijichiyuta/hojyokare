@@ -6,6 +6,8 @@ import { chipClass, dueStatus, periodStatus, todayJST } from "@/lib/status";
 import { calcDeadlines, type DeadlineItem, type DeadlineResult } from "@/lib/subsidy/deadline";
 import type { SourceRef } from "@/lib/subsidy/types";
 
+import { PrintButton } from "./print-button";
+
 const PAID_POINTS = [
   {
     title: "90/60/30/14/7/前日の段階通知",
@@ -141,7 +143,7 @@ export default async function ResultPage({
 
   return (
     <div className="mx-auto max-w-[1200px] px-10 pb-20 pt-8">
-      <div className="mb-5 flex items-center gap-2.5 text-xs text-soft">
+      <div className="print-hide mb-5 flex items-center gap-2.5 text-xs text-soft">
         <Link href="/" className="hover:text-navy">
           ホーム
         </Link>
@@ -153,7 +155,7 @@ export default async function ResultPage({
         <span className="text-ink">計算結果</span>
       </div>
 
-      <div className="grid grid-cols-[1fr_320px] items-start gap-7">
+      <div className="print-full grid grid-cols-[1fr_320px] items-start gap-7">
         <div>
           <div className="mb-5 rounded-md border border-line bg-white">
             <div className="border-b border-line px-7 pb-5 pt-6">
@@ -258,13 +260,8 @@ export default async function ResultPage({
             </p>
           </div>
 
-          <div className="flex gap-3">
-            <span
-              className="cursor-default rounded border border-border-input bg-white px-[22px] py-[13px] text-sm text-mute"
-              title="準備中"
-            >
-              PDFで保存(準備中)
-            </span>
+          <div className="print-hide flex gap-3">
+            <PrintButton />
             {mailSent ? (
               <span className="cursor-default rounded border border-border-input bg-white px-[22px] py-[13px] text-sm text-sub">
                 メールで送付済み
@@ -285,7 +282,7 @@ export default async function ResultPage({
             </Link>
           </div>
           {email ? (
-            <p className="mt-3 text-xs text-soft">
+            <p className="print-hide mt-3 text-xs text-soft">
               30日前アラートの送付先: <span className="tnum">{email}</span>
               {mailSent ? "" : "(メール送信は準備中です)"}
             </p>
@@ -293,7 +290,7 @@ export default async function ResultPage({
         </div>
 
         {/* サイドバー: 有料版アップセル */}
-        <div className="flex flex-col gap-4">
+        <div className="print-hide flex flex-col gap-4">
           <div className="rounded-md border border-line bg-white px-6 py-[22px]">
             <div className="mb-1 text-sm font-bold">この先を有料版に任せる</div>
             <div className="mb-2 text-xs leading-[1.8] text-soft">
