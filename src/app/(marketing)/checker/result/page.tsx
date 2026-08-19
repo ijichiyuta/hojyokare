@@ -10,12 +10,21 @@ import { PrintButton } from "./print-button";
 
 const PAID_POINTS = [
   {
+    title: "LINEで証憑を回収",
+    body: "現場から送ってもらうだけで、見積・請求・振込記録などが案件フォルダに自動で入ります。",
+  },
+  {
+    title: "不足分だけをまとめて催促",
+    body: "この報告に必要な書類の「揃った/未収集」を管理し、足りない分だけ担当者に催促できます。",
+  },
+  {
+    title: "翌年の報告は前年の更新で終わる",
+    body: "報告書・証憑・通知履歴を5年保存。担当者が代わっても引き継げます。",
+  },
+  {
     title: "90/60/30/14/7/前日の段階通知",
     body: "LINEとメールに、やることと必要書類を添えて届きます。",
   },
-  { title: "LINEで証憑を回収", body: "現場から送ってもらった書類が案件フォルダに自動で入ります。" },
-  { title: "報告準備チェックリスト", body: "不足分だけをまとめて催促できます。" },
-  { title: "5年保存", body: "報告書・証憑・通知履歴をまとめて保管・検索。" },
 ];
 
 function firstParam(v: string | string[] | undefined): string {
@@ -278,7 +287,7 @@ export default async function ResultPage({
               href="/#pricing"
               className="ml-auto rounded bg-navy px-[26px] py-[13px] text-sm font-medium text-white hover:bg-navy-hover"
             >
-              LINEリマインドを設定する(有料版)
+              書類集めまで任せる(有料版)
             </Link>
           </div>
           {email ? (
@@ -292,9 +301,9 @@ export default async function ResultPage({
         {/* サイドバー: 有料版アップセル */}
         <div className="print-hide flex flex-col gap-4">
           <div className="rounded-md border border-line bg-white px-6 py-[22px]">
-            <div className="mb-1 text-sm font-bold">この先を有料版に任せる</div>
+            <div className="mb-1 text-sm font-bold">書類集めから、有料版に任せる</div>
             <div className="mb-2 text-xs leading-[1.8] text-soft">
-              無料アラートは30日前に1通、この案件のみです。
+              期限はこの画面とカレンダーで足ります。大変なのは、この日までに証憑一式を揃えることです。
             </div>
             {PAID_POINTS.map((p) => (
               <div key={p.title} className="border-t border-line-soft py-3">
@@ -306,6 +315,9 @@ export default async function ResultPage({
               <div className="tnum flex items-baseline gap-1.5">
                 <span className="text-[28px] font-bold">9,800</span>
                 <span className="text-[13px] text-sub">円 / 月・案件(税抜)</span>
+              </div>
+              <div className="mt-1.5 text-[11px] leading-[1.8] text-mute">
+                報告のたびの外注費用や、補助金の返還リスクと比べてください。
               </div>
               <Link
                 href="/#pricing"

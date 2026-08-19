@@ -29,24 +29,24 @@ const STEPS = [
 
 const FEATURES = [
   {
-    tag: "期限",
-    title: "制度ごとの期限を自動で組み立てる",
-    body: "公募回ごとのルールをマスタとして持ち、決算月の変更にも追随します。事務局の個別指示は手動で上書きでき、変更は履歴に残ります。",
-  },
-  {
     tag: "証憑",
-    title: "LINEで送るだけで、案件フォルダに入る",
-    body: "見積・発注・納品・検収・請求・振込・賃金台帳などに自動で仕分け。誤りは手で直せて、原本は無加工のまま保管します。",
+    title: "LINEで送るだけで、書類が集まる",
+    body: "見積・発注・納品・検収・請求・振込・賃金台帳などに自動で仕分け。現場に送ってもらうだけで、案件フォルダに原本が無加工のまま保管されます。",
   },
   {
     tag: "報告準備",
     title: "何が足りないかだけを催促する",
-    body: "報告回ごとの必要書類に対して、揃った／未収集を表示。不足分だけをまとめて担当者へ催促できます。",
+    body: "報告回ごとの必要書類に対して、揃った／未収集を表示。不足分だけをまとめて担当者へ催促できます。期限を知ることではなく、書類を揃えることが報告の実務です。",
   },
   {
     tag: "5年保存",
     title: "翌年の報告は、前年の更新で終わる",
-    body: "報告履歴と証憑が案件ごとに5年分たまるため、2年目以降は差分の入力が中心になります。",
+    body: "報告履歴と証憑が案件ごとに5年分たまるため、担当者が代わっても引き継げます。2年目以降は差分の入力が中心になります。",
+  },
+  {
+    tag: "期限",
+    title: "制度ごとの期限を自動で組み立てる",
+    body: "公募回ごとのルールをマスタとして持ち、決算月の変更にも追随します。事務局の個別指示は手動で上書きでき、変更は履歴に残ります。",
   },
 ];
 
@@ -66,10 +66,10 @@ const PLANS = [
     unit: "円 / 月・案件",
     cta: "申し込む",
     items: [
+      "証憑ボックスと自動仕分け(LINE)",
+      "報告準備チェックリストと不足分の催促",
+      "報告履歴を5年保存(翌年は前年更新)",
       "段階リマインド(LINE・メール)",
-      "証憑ボックスと自動仕分け",
-      "報告準備チェックリスト",
-      "報告履歴を5年保存",
     ],
   },
   {
@@ -235,7 +235,10 @@ export default function LandingPage() {
       <section id="features" className="border-b border-line bg-surface">
         <div className="mx-auto max-w-[1200px] px-10 py-16">
           <h2 className="mb-2 text-[13px] font-medium tracking-[0.14em] text-soft">機能</h2>
-          <p className="mb-9 text-2xl font-bold">採択後にやることを、ひとつの画面に。</p>
+          <p className="mb-2 text-2xl font-bold">期限を知るだけなら、無料のままでいい。</p>
+          <p className="mb-9 text-sm text-sub">
+            有料版が引き受けるのは、報告のたびに発生する「書類集め」の実務です。
+          </p>
           <div className="grid grid-cols-2 gap-px border border-line bg-line">
             {FEATURES.map((f) => (
               <div key={f.tag} className="grid grid-cols-[96px_1fr] gap-5 bg-white px-7 py-[30px]">
