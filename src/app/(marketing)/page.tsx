@@ -108,15 +108,13 @@ export default function LandingPage() {
             <div className="mb-6 inline-block rounded-[3px] border border-amber-line bg-amber-bg px-2.5 py-[5px] text-xs tracking-[0.08em] text-amber-deep">
               事業再構築補助金／ものづくり補助金 対応
             </div>
-            <h1 className="mb-6 text-[46px] font-bold leading-[1.4] tracking-[0.01em] [text-wrap:pretty]">
+            <h1 className="mb-6 text-[46px] font-bold leading-[1.4] tracking-[0.01em] [text-wrap:balance]">
               採択の6年後まで、
               <br />
-              報告期限を落とさない。
+              報告を落とさない。
             </h1>
-            <p className="mb-8 max-w-[30em] text-base leading-loose text-sub [text-wrap:pretty]">
-              実績報告は交付決定から12ヶ月以内。そのあと事業化状況報告が5年間・計6回。
-              <br />
-              交付決定日を入れるだけで、すべての報告期限がカレンダーになります。
+            <p className="mb-8 max-w-[32em] text-base leading-loose text-sub">
+              実績報告のあとも、事業化状況報告が5年間・計6回つづきます。期限の計算とアラートはずっと無料。有料版は、そのたびに発生する証憑集めと催促まで引き受けます。
             </p>
             <div className="mb-5 flex gap-3">
               <Link

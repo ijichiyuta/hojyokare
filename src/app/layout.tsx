@@ -11,7 +11,7 @@ const notoSansJp = Noto_Sans_JP({
 export const metadata: Metadata = {
   title: "ホジョカレ | 補助金採択後の期限・報告管理",
   description:
-    "実績報告は交付決定から12ヶ月以内。そのあと事業化状況報告が続く。交付決定日を入れるだけで、報告期限がカレンダーになります。事業再構築補助金・ものづくり補助金対応。",
+    "補助金採択後の実績報告・事業化状況報告(5年・計6回)の期限を無料で自動計算。有料版は証憑の回収・チェックリスト・催促まで、報告のたびの書類集めを引き受けます。事業再構築補助金・ものづくり補助金対応。",
 };
 
 export default function RootLayout({ children }: LayoutProps<"/">) {
